@@ -1,5 +1,5 @@
 #config files
-./server/config.env
+server/config.env
 
 # Logs
 logs
