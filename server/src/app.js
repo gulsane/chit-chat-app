@@ -18,4 +18,35 @@ app.use(
 	})
 );
 
+app.use(cookieParser());
+app.use(express.json({ limit: "10kb" }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+	session({
+		secret: "anonymous monkey",
+		proxy: true,
+		resave: true,
+		saveUnintialized: true,
+		cookie: {
+			secure: false,
+		},
+	})
+);
+
+app.use(helmet());
+
+if (process.env.NODE_ENV === "development") {
+	app.use(morgan("dev"));
+}
+
+app.use(
+	express.urlencoded({
+		extended: true,
+	})
+);
+
+app.use(mongosanitize());
+
+app.use(xss());
 module.exports = app;
