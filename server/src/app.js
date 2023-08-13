@@ -40,6 +40,14 @@ if (process.env.NODE_ENV === "development") {
 	app.use(morgan("dev"));
 }
 
+const limiter = rateLimit({
+	max: 3000,
+	windowMs: 60 * 60 * 1000,
+	message: "Too many Requests from this IP, please try again in an hour!",
+});
+
+app.use("/tawk", limiter);
+
 app.use(
 	express.urlencoded({
 		extended: true,
