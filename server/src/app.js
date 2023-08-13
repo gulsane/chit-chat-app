@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const session = require("cookie-session");
+const routes = require("./routes/index.js");
 const express = require("express");
 const app = express();
 
@@ -55,6 +56,6 @@ app.use(
 );
 
 app.use(mongosanitize());
-
 app.use(xss());
+app.use(routes);
 module.exports = app;
