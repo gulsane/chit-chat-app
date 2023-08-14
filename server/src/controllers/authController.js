@@ -1,16 +1,17 @@
 const User = require("../models/user");
 const otpGenerator = require("otp-generator");
-
-const catchAsync = (func) => {
-	return (req, res, next) => {
-		func(req, res, next).catch((err) => next(err));
-	};
-};
+const catchAsync = require("../utils/catchAsync");
+const filterObj = require("../utils/filterObj");
 
 const register = catchAsync(async (req, res, next) => {
-	const { firstName, lastName, email, password } = req.body;
+	const filteredBody = filterObj(req.body, [
+		"firstName",
+		"lastName",
+		"email",
+		"password",
+	]);
 
-	const existing_user = User.findOne({ email: email });
+	const existing_user = User.findOne({ email: filteredBody.email });
 
 	if (existing_user && existing_user.verified) {
 		res.status(400).json({
@@ -19,19 +20,14 @@ const register = catchAsync(async (req, res, next) => {
 		});
 	} else if (existing_user) {
 		await User.findOneAndUpdate(
-			{ email: email },
-			{ firstName, lastName, email, password },
+			{ email: filteredBody.email },
+			{ ...filteredBody },
 			{ new: true, validateModifiedOnly: true }
 		);
 		req.user_id = existing_user._id;
 		next();
 	} else {
-		const new_user = await User.create({
-			firstName,
-			lastName,
-			email,
-			password,
-		});
+		const new_user = await User.create({ ...filteredBody });
 		req.user_id = new_user._id;
 		next();
 	}
