@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema({
 	firstName: {
@@ -71,6 +72,15 @@ const userSchema = new mongoose.Schema({
 			ref: "User",
 		},
 	],
+});
+
+userSchema.pre("save", async function (next) {
+	if (!this.isModified("otp") || !this.otp) {
+		return next();
+	}
+
+	this.otp = await bcrypt.hash(this.otp.toString(), 12);
+	next();
 });
 
 const User = new mongoose.model("User", userSchema);
