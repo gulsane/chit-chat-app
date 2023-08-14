@@ -107,6 +107,13 @@ userSchema.methods.isCorrectOTP = async function (candidateOTP, userOTP) {
 	return await bcrypt.compare(candidateOTP, userOTP);
 };
 
+userSchema.methods.isCorrectPassword = async function (
+	candidatePassword,
+	userPassword
+) {
+	return await bcrypt.compare(candidatePassword, userPassword);
+};
+
 const User = new mongoose.model("User", userSchema);
 
 module.exports = User;
