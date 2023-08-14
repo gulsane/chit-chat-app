@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const otpGenerator = require("otp-generator");
 
 const register = async (req, res, next) => {
 	try {
@@ -34,4 +35,34 @@ const register = async (req, res, next) => {
 	}
 };
 
-module.exports = { register };
+const sendOTP = async (req, res, next) => {
+	try {
+		const { user_id } = req;
+
+		const new_otp = otpGenerator.generate(6, {
+			upperCaseAlphabets: false,
+			specialChars: false,
+			lowerCaseAlphabets: false,
+		});
+
+		const otp_expiry_time = Date.now() + 10 * 60 * 1000;
+
+		const user = await User.findByIdAndUpdate(user_id, {
+			otp_expiry_time: otp_expiry_time,
+		});
+
+		user.otp = new_otp.toString();
+		await user.save({ new: true, validateModifiedOnly: true });
+
+		//TODO -> Add mailer service here
+
+		res.status(200).json({
+			status: "success",
+			message: "OTP Sent Successfully!",
+		});
+	} catch (error) {
+		next(error);
+	}
+};
+
+module.exports = { register, sendOTP };
