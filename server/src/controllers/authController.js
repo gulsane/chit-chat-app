@@ -3,6 +3,7 @@ const otpGenerator = require("otp-generator");
 const catchAsync = require("../utils/catchAsync");
 const filterObj = require("../utils/filterObj");
 const sendEmail = require("../services/mailer");
+const otpTemplate = require("../Templates/otpTemplate");
 
 const register = catchAsync(async (req, res, next) => {
 	const filteredBody = filterObj(req.body, [
@@ -52,11 +53,10 @@ const sendOTP = catchAsync(async (req, res, next) => {
 	user.otp = new_otp.toString();
 	await user.save({ new: true, validateModifiedOnly: true });
 
-	//TODO -> Add html template for otp
 	sendEmail({
 		to: user.email,
 		subject: "OTP Verification",
-		html: "TODO-> html template for otp",
+		html: otpTemplate(user.firstName, new_otp),
 		attachments: [],
 	});
 
