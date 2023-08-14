@@ -113,4 +113,34 @@ const verifyOTP = catchAsync(async (req, res, next) => {
 	});
 });
 
-module.exports = { register, sendOTP, verifyOTP };
+const login = catchAsync(async (req, res, next) => {
+	const { email, password } = req.body;
+	if (!email || !password) {
+		res.status(400).json({
+			status: "error",
+			message: "Both email and password are required",
+		});
+		return;
+	}
+
+	const user = await User.findOne({ email }).select("+password");
+
+	if (!user || !(await user.isCorrectPassword(password, user.password))) {
+		res.status(400).json({
+			status: "error",
+			message: "Email or Password is correct",
+		});
+		return;
+	}
+
+	const token = signToken(user._id);
+
+	res.status(200).json({
+		status: "success",
+		message: "Logged In succeffylly",
+		token,
+		user_id: user._id,
+	});
+});
+
+module.exports = { register, sendOTP, verifyOTP, login };
