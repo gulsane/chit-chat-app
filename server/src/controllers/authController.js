@@ -2,6 +2,7 @@ const User = require("../models/user");
 const otpGenerator = require("otp-generator");
 const catchAsync = require("../utils/catchAsync");
 const filterObj = require("../utils/filterObj");
+const sendEmail = require("../services/mailer");
 
 const register = catchAsync(async (req, res, next) => {
 	const filteredBody = filterObj(req.body, [
@@ -51,7 +52,13 @@ const sendOTP = catchAsync(async (req, res, next) => {
 	user.otp = new_otp.toString();
 	await user.save({ new: true, validateModifiedOnly: true });
 
-	//TODO -> Add mailer service here
+	//TODO -> Add html template for otp
+	sendEmail({
+		to: user.email,
+		subject: "OTP Verification",
+		html: "TODO-> html template for otp",
+		attachments: [],
+	});
 
 	res.status(200).json({
 		status: "success",
