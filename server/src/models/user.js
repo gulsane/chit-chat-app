@@ -103,6 +103,10 @@ userSchema.pre("save", function (next) {
 	next();
 });
 
+userSchema.methods.isCorrectOTP = async function (candidateOTP, userOTP) {
+	return await bcrypt.compare(candidateOTP, userOTP);
+};
+
 const User = new mongoose.model("User", userSchema);
 
 module.exports = User;
