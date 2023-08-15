@@ -186,4 +186,4 @@ const forgetPassword = catchAsync(async (req, res, next) => {
 	}
 });
 
-module.exports = { register, sendOTP, verifyOTP, login };
+module.exports = { register, sendOTP, verifyOTP, login, forgetPassword };
