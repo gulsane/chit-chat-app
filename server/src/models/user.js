@@ -128,6 +128,18 @@ userSchema.methods.createPasswordResetToken = async function () {
 	return resetToken;
 };
 
+userSchema.methods.changedPasswordAfter = function (JWTTimeStamp) {
+	if (this.passwordChangedAt) {
+		const changedTimeStamp = parseInt(
+			this.passwordChangedAt.getTime() / 1000,
+			10
+		);
+		return JWTTimeStamp < changedTimeStamp;
+	}
+
+	return false;
+};
+
 const User = new mongoose.model("User", userSchema);
 
 module.exports = User;
