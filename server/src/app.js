@@ -47,7 +47,7 @@ const limiter = rateLimit({
 	message: "Too many Requests from this IP, please try again in an hour!",
 });
 
-app.use("/tawk", limiter);
+app.use("/chit-chat", limiter);
 
 app.use(
 	express.urlencoded({

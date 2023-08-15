@@ -6,6 +6,7 @@ const filterObj = require("../utils/filterObj");
 const sendEmail = require("../services/mailer");
 const otpTemplate = require("../Templates/mail/otpTemplate");
 const passwordResetTemplate = require("../Templates/mail/passwordResetTemplate");
+const { promisify } = require("util");
 
 const signToken = (userId) => jwt.sign({ userId }, process.env.JWT_SECRET);
 
@@ -218,6 +219,44 @@ const resetPassword = catchAsync(async (req, res, next) => {
 		message: "Password Reseted Successfully",
 		token,
 	});
+});
+
+const protect = catchAsync(async (req, res, next) => {
+	let token;
+
+	if (
+		req.headers.authorization &&
+		req.headers.authorization.startsWith("Bearer")
+	) {
+		token = req.headers.authorization.split(" ")[1];
+	} else if (req.cookies.jwt) {
+		token = req.cookies.jwt;
+	}
+
+	if (!token) {
+		return res.status(401).json({
+			message: "You are not logged in! Please log in first",
+		});
+	}
+
+	const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+
+	const user = await User.findById(decoded.userId);
+
+	if (!user) {
+		return res.status(401).json({
+			message: "The user with no longer exists",
+		});
+	}
+
+	if (user.changedPasswordAfter(decode.iat)) {
+		return res.status(401).json({
+			message: "Password was changed recently, Plase login again",
+		});
+	}
+
+	req.user = user;
+	next();
 });
 
 module.exports = {
