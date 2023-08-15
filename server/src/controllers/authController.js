@@ -4,7 +4,8 @@ const User = require("../models/user");
 const catchAsync = require("../utils/catchAsync");
 const filterObj = require("../utils/filterObj");
 const sendEmail = require("../services/mailer");
-const otpTemplate = require("../Templates/otpTemplate");
+const otpTemplate = require("../Templates/mail/otpTemplate");
+const passwordResetTemplate = require("../Templates/mail/passwordResetTemplate");
 
 const signToken = (userId) => jwt.sign({ userId }, process.env.JWT_SECRET);
 
@@ -57,6 +58,7 @@ const sendOTP = catchAsync(async (req, res, next) => {
 	await user.save({ new: true, validateModifiedOnly: true });
 
 	sendEmail({
+		sender: process.env.MAIL_SENDER,
 		to: user.email,
 		subject: "OTP Verification",
 		html: otpTemplate(user.firstName, new_otp),
@@ -141,6 +143,47 @@ const login = catchAsync(async (req, res, next) => {
 		token,
 		user_id: user._id,
 	});
+});
+
+const forgetPassword = catchAsync(async (req, res, next) => {
+	const { email } = req.body;
+
+	const user = await User.findOne({ email });
+	if (!user) {
+		res.status(400).json({
+			status: "error",
+			message: `There is no user with email (${email})`,
+		});
+		return;
+	}
+
+	const resetToken = user.createPasswordResetToken();
+	await user.save({ validateBeforeSave: false });
+
+	try {
+		const resetURL = `http://localhost:3000/auth/new-password?token=${resetToken}`;
+
+		sendEmail({
+			sender: process.env.MAIL_SENDER,
+			to: user.email,
+			subject: "Password Reset",
+			html: passwordResetTemplate(user.firstName, resetURL),
+			attachments: [],
+		});
+
+		res.status(200).json({
+			status: "succes",
+			message: `Password Reset Link is sent to email (${user.email})`,
+		});
+	} catch (error) {
+		user.passwordResetToken = undefined;
+		user.passwordResetExpires = undefined;
+		await user.save({ validateBeforeSave: false });
+
+		return res.status(500).json({
+			message: "There was an error sending the email. Try again later!",
+		});
+	}
 });
 
 module.exports = { register, sendOTP, verifyOTP, login };

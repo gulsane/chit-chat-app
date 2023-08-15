@@ -295,3 +295,5 @@ const passwordResetTemplate = (name, link) => {
     
     </html>`;
 };
+
+module.exports = passwordResetTemplate;
