@@ -7,6 +7,9 @@ const initialState = {
 
 	onToggleMode: () => {},
 	onChangeMode: () => {},
+
+	onToggleDirection: () => {},
+	onChangeDirection: () => {},
 };
 
 const SettingsContext = createContext(initialState);
@@ -32,6 +35,19 @@ const SettingsProvider = ({ children }) => {
 		setSettings({
 			...settings,
 			themeMode: event.target.value,
+		});
+	};
+
+	const onToggleDirection = () => {
+		setSettings({
+			...settings,
+			themeDirection: settings.themeDirection === "rtl" ? "ltr" : "rtl",
+		});
+	};
+	const onChangeDirection = (event) => {
+		setSettings({
+			...settings,
+			themeDirection: event.target.value,
 		});
 	};
 	return (
