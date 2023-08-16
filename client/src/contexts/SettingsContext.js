@@ -13,6 +13,9 @@ const initialState = {
 
 	onToggleLayout: () => {},
 	onChangeLayout: () => {},
+
+	onToggleContrast: () => {},
+	onChangeContrast: () => {},
 };
 
 const SettingsContext = createContext(initialState);
@@ -47,6 +50,7 @@ const SettingsProvider = ({ children }) => {
 			themeDirection: settings.themeDirection === "rtl" ? "ltr" : "rtl",
 		});
 	};
+
 	const onChangeDirection = (event) => {
 		setSettings({
 			...settings,
@@ -60,6 +64,7 @@ const SettingsProvider = ({ children }) => {
 			themeLayout: settings.themeLayout === "vertical" ? "horizontal" : "vertical",
 		});
 	};
+
 	const onChangeLayout = (event) => {
 		setSettings({
 			...settings,
@@ -67,6 +72,19 @@ const SettingsProvider = ({ children }) => {
 		});
 	};
 
+	const onToggleContrast = () => {
+		setSettings({
+			...settings,
+			themeContrast: settings.themeContrast === "default" ? "bold" : "default",
+		});
+	};
+
+	const onChangeContrast = (event) => {
+		setSettings({
+			...settings,
+			themeContrast: event.target.value,
+		});
+	};
 	return (
 		<SettingsContext.Provider
 			value={{
@@ -77,6 +95,8 @@ const SettingsProvider = ({ children }) => {
 				onChangeDirection,
 				onToggleLayout,
 				onChangeLayout,
+				onToggleContrast,
+				onChangeContrast,
 			}}
 		>
 			{children}
