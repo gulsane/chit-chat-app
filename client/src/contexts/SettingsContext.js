@@ -19,6 +19,8 @@ const initialState = {
 
 	onToggleStretch: () => {},
 
+	onChangeColor: () => {},
+
 	onResetSetting: () => {},
 };
 
@@ -97,6 +99,13 @@ const SettingsProvider = ({ children }) => {
 		});
 	};
 
+	const onChangeColor = (event) => {
+		setSettings({
+			...settings,
+			themeColorPresets: event.target.value,
+		});
+	};
+
 	const onResetSetting = () => {
 		setSettings({
 			themeMode: initialState.themeMode,
@@ -122,6 +131,7 @@ const SettingsProvider = ({ children }) => {
 				onChangeContrast,
 				onToggleStretch,
 				onResetSetting,
+				onChangeColor,
 			}}
 		>
 			{children}
