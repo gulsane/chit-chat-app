@@ -10,6 +10,9 @@ const initialState = {
 
 	onToggleDirection: () => {},
 	onChangeDirection: () => {},
+
+	onToggleLayout: () => {},
+	onChangeLayout: () => {},
 };
 
 const SettingsContext = createContext(initialState);
@@ -50,12 +53,30 @@ const SettingsProvider = ({ children }) => {
 			themeDirection: event.target.value,
 		});
 	};
+
+	const onToggleLayout = () => {
+		setSettings({
+			...settings,
+			themeLayout: settings.themeLayout === "vertical" ? "horizontal" : "vertical",
+		});
+	};
+	const onChangeLayout = (event) => {
+		setSettings({
+			...settings,
+			themeLayout: event.target.value,
+		});
+	};
+
 	return (
 		<SettingsContext.Provider
 			value={{
 				...settings,
 				onToggleMode,
 				onChangeMode,
+				onToggleDirection,
+				onChangeDirection,
+				onToggleLayout,
+				onChangeLayout,
 			}}
 		>
 			{children}
