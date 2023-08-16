@@ -1,5 +1,9 @@
 import { createContext } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
+import getColorPresets, {
+	defaultPreset,
+	colorPresets,
+} from "../utils/getColorPresets";
 import { defaultSettings } from "../config";
 
 const initialState = {
@@ -22,6 +26,8 @@ const initialState = {
 	onChangeColor: () => {},
 
 	onResetSetting: () => {},
+	setColor: defaultPreset,
+	colorOption: [],
 };
 
 const SettingsContext = createContext(initialState);
@@ -132,6 +138,11 @@ const SettingsProvider = ({ children }) => {
 				onToggleStretch,
 				onResetSetting,
 				onChangeColor,
+				setColor: getColorPresets(settings.themeColorPresets),
+				colorOption: colorPresets.map((color) => ({
+					name: color.name,
+					value: color.main,
+				})),
 			}}
 		>
 			{children}
