@@ -16,6 +16,10 @@ const initialState = {
 
 	onToggleContrast: () => {},
 	onChangeContrast: () => {},
+
+	onToggleStretch: () => {},
+
+	onResetSetting: () => {},
 };
 
 const SettingsContext = createContext(initialState);
@@ -85,6 +89,25 @@ const SettingsProvider = ({ children }) => {
 			themeContrast: event.target.value,
 		});
 	};
+
+	const onToggleStretch = () => {
+		setSettings({
+			...settings,
+			themeStretch: !settings.themeStretch,
+		});
+	};
+
+	const onResetSetting = () => {
+		setSettings({
+			themeMode: initialState.themeMode,
+			themeLayout: initialState.themeLayout,
+			themeStretch: initialState.themeStretch,
+			themeContrast: initialState.themeContrast,
+			themeDirection: initialState.themeDirection,
+			themeColorPresets: initialState.themeColorPresets,
+		});
+	};
+
 	return (
 		<SettingsContext.Provider
 			value={{
@@ -97,6 +120,8 @@ const SettingsProvider = ({ children }) => {
 				onChangeLayout,
 				onToggleContrast,
 				onChangeContrast,
+				onToggleStretch,
+				onResetSetting,
 			}}
 		>
 			{children}
