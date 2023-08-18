@@ -1,10 +1,18 @@
 import { useState, useEffect } from "react";
 import { alpha, styled } from "@mui/material/styles";
-import { Backdrop, IconButton, Stack, Typography } from "@mui/material";
+import {
+	Backdrop,
+	Divider,
+	IconButton,
+	Stack,
+	Typography,
+} from "@mui/material";
 import { AnimatePresence, m } from "framer-motion";
 import cssStyles from "../../../utils/cssStyles";
 import Iconify from "../../Iconify";
 import { NAVBAR } from "../../../config";
+
+import Scrollbar from "../../Scrollbar";
 
 const RootStyle = styled(m.div)(({ theme }) => ({
 	...cssStyles(theme).bgBlur({
@@ -76,6 +84,8 @@ const SettingsDrawer = function () {
 							<Iconify icon={"eva:close-fill"} width={20} height={20} />
 						</IconButton>
 					</Stack>
+					<Divider sx={{ borderStyle: "dashed" }} />
+					<Scrollbar sx={{ flexGrow: 1 }}></Scrollbar>
 				</RootStyle>
 			</AnimatePresence>
 		</>
