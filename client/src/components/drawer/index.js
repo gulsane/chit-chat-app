@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { alpha, styled } from "@mui/material/styles";
-import { Backdrop } from "@mui/material";
+import { Backdrop, IconButton, Stack, Typography } from "@mui/material";
 import { AnimatePresence, m } from "framer-motion";
 import cssStyles from "../../utils/cssStyles";
+import Iconify from "../Iconify";
 
 const NAVBAR = {
 	BASE_WIDTH: 260,
@@ -65,7 +66,26 @@ const SettingsDrawer = function () {
 				}}
 			/>
 			<AnimatePresence>
-				<RootStyle>setting drawer</RootStyle>
+				<RootStyle>
+					<Stack
+						direction="row"
+						alignItems="center"
+						justifyContent="space-between"
+						sx={{ py: 2, pr: 1, pl: 2.5 }}
+					>
+						<Typography variant="subtitle1" sx={{ flexGrow: 1 }}>
+							Settings
+						</Typography>
+
+						<IconButton onClick={() => {}}>
+							<Iconify icon={"ic:round-refresh"} width={20} height={20} />
+						</IconButton>
+
+						<IconButton onClick={() => {}}>
+							<Iconify icon={"eva:close-fill"} width={20} height={20} />
+						</IconButton>
+					</Stack>
+				</RootStyle>
 			</AnimatePresence>
 		</>
 	);
