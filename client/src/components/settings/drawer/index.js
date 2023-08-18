@@ -7,12 +7,14 @@ import {
 	Stack,
 	Typography,
 } from "@mui/material";
+import useSettings from "../../../hooks/useSettings";
 import { AnimatePresence, m } from "framer-motion";
 import cssStyles from "../../../utils/cssStyles";
 import Iconify from "../../Iconify";
-import { NAVBAR } from "../../../config";
+import { NAVBAR, defaultSettings } from "../../../config";
 
 import Scrollbar from "../../Scrollbar";
+import ToggleButton from "./ToggleButton";
 
 const RootStyle = styled(m.div)(({ theme }) => ({
 	...cssStyles(theme).bgBlur({
@@ -40,7 +42,24 @@ const RootStyle = styled(m.div)(({ theme }) => ({
 }));
 
 const SettingsDrawer = function () {
-	const [open, setOpen] = useState(true);
+	const {
+		themeMode,
+		themeLayout,
+		themeStretch,
+		themeContrast,
+		themeDirection,
+		themeColorPresets,
+	} = useSettings();
+
+	const [open, setOpen] = useState(false);
+
+	const notDefault =
+		themeMode !== defaultSettings.themeMode ||
+		themeLayout !== defaultSettings.themeLayout ||
+		themeStretch !== defaultSettings.themeStretch ||
+		themeContrast !== defaultSettings.themeContrast ||
+		themeDirection !== defaultSettings.themeDirection ||
+		themeColorPresets !== defaultSettings.themeColorPresets;
 
 	useEffect(() => {
 		if (open) {
@@ -54,6 +73,10 @@ const SettingsDrawer = function () {
 		setOpen(false);
 	};
 
+	const onToggle = () => {
+		setOpen((pre) => !pre);
+	};
+
 	return (
 		<>
 			<Backdrop
@@ -64,29 +87,34 @@ const SettingsDrawer = function () {
 					zIndex: (theme) => theme.zIndex.drawer + 1,
 				}}
 			/>
+			{!open && (
+				<ToggleButton open={open} notDefault={notDefault} onToggle={onToggle} />
+			)}
 			<AnimatePresence>
-				<RootStyle>
-					<Stack
-						direction="row"
-						alignItems="center"
-						justifyContent="space-between"
-						sx={{ py: 2, pr: 1, pl: 2.5 }}
-					>
-						<Typography variant="subtitle1" sx={{ flexGrow: 1 }}>
-							Settings
-						</Typography>
+				{open && (
+					<RootStyle>
+						<Stack
+							direction="row"
+							alignItems="center"
+							justifyContent="space-between"
+							sx={{ py: 2, pr: 1, pl: 2.5 }}
+						>
+							<Typography variant="subtitle1" sx={{ flexGrow: 1 }}>
+								Settings
+							</Typography>
 
-						<IconButton onClick={() => {}}>
-							<Iconify icon={"ic:round-refresh"} width={20} height={20} />
-						</IconButton>
+							<IconButton onClick={() => {}}>
+								<Iconify icon={"ic:round-refresh"} width={20} height={20} />
+							</IconButton>
 
-						<IconButton onClick={() => {}}>
-							<Iconify icon={"eva:close-fill"} width={20} height={20} />
-						</IconButton>
-					</Stack>
-					<Divider sx={{ borderStyle: "dashed" }} />
-					<Scrollbar sx={{ flexGrow: 1 }}></Scrollbar>
-				</RootStyle>
+							<IconButton onClick={() => {}}>
+								<Iconify icon={"eva:close-fill"} width={20} height={20} />
+							</IconButton>
+						</Stack>
+						<Divider sx={{ borderStyle: "dashed" }} />
+						<Scrollbar sx={{ flexGrow: 1 }}></Scrollbar>
+					</RootStyle>
+				)}
 			</AnimatePresence>
 		</>
 	);
