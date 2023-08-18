@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import ThemeColorPresets from "./ThemeColorPresets";
 import ThemeContrast from "./ThemeContrast";
+import ThemeLocalization from "./ThemeLocalization";
 
 ThemeSettings.propTypes = {
 	children: PropTypes.node.isRequired,
@@ -9,7 +10,9 @@ ThemeSettings.propTypes = {
 export default function ThemeSettings({ children }) {
 	return (
 		<ThemeColorPresets>
-			<ThemeContrast>{children}</ThemeContrast>
+			<ThemeContrast>
+				<ThemeLocalization>{children}</ThemeLocalization>
+			</ThemeContrast>
 		</ThemeColorPresets>
 	);
 }
