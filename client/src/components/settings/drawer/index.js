@@ -15,6 +15,7 @@ import { NAVBAR, defaultSettings } from "../../../config";
 
 import Scrollbar from "../../Scrollbar";
 import ToggleButton from "./ToggleButton";
+import SettingDirection from "./SettingDirection";
 
 const RootStyle = styled(m.div)(({ theme }) => ({
 	...cssStyles(theme).bgBlur({
@@ -112,7 +113,14 @@ const SettingsDrawer = function () {
 							</IconButton>
 						</Stack>
 						<Divider sx={{ borderStyle: "dashed" }} />
-						<Scrollbar sx={{ flexGrow: 1 }}></Scrollbar>
+						<Scrollbar sx={{ flexGrow: 1 }}>
+							<Stack spacing={3} sx={{ p: 3 }}>
+								<Stack spacing={1.5}>
+									<Typography variant="subtitle2">Direction</Typography>
+									<SettingDirection />
+								</Stack>
+							</Stack>
+						</Scrollbar>
 					</RootStyle>
 				)}
 			</AnimatePresence>
