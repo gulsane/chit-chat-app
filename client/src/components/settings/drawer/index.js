@@ -16,6 +16,7 @@ import { NAVBAR, defaultSettings } from "../../../config";
 import Scrollbar from "../../Scrollbar";
 import ToggleButton from "./ToggleButton";
 import SettingDirection from "./SettingDirection";
+import SettingColorPresets from "./SettingColorPresets";
 
 const RootStyle = styled(m.div)(({ theme }) => ({
 	...cssStyles(theme).bgBlur({
@@ -118,6 +119,10 @@ const SettingsDrawer = function () {
 								<Stack spacing={1.5}>
 									<Typography variant="subtitle2">Direction</Typography>
 									<SettingDirection />
+								</Stack>
+								<Stack spacing={1.5}>
+									<Typography variant="subtitle2">Presets</Typography>
+									<SettingColorPresets />
 								</Stack>
 							</Stack>
 						</Scrollbar>
