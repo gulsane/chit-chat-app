@@ -107,7 +107,7 @@ const SettingsDrawer = function () {
 								<Iconify icon={"ic:round-refresh"} width={20} height={20} />
 							</IconButton>
 
-							<IconButton onClick={() => {}}>
+							<IconButton onClick={handleClose}>
 								<Iconify icon={"eva:close-fill"} width={20} height={20} />
 							</IconButton>
 						</Stack>
