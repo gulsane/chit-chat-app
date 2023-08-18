@@ -3,7 +3,7 @@ import ThemeColorPresets from "./ThemeColorPresets";
 import ThemeContrast from "./ThemeContrast";
 import ThemeLocalization from "./ThemeLocalization";
 import ThemeRtlLayout from "./ThemeRtlLayout";
-import SettingDrawer from "../drawer";
+import SettingsDrawer from "../drawer";
 
 ThemeSettings.propTypes = {
 	children: PropTypes.node.isRequired,
@@ -16,7 +16,7 @@ export default function ThemeSettings({ children }) {
 				<ThemeLocalization>
 					<ThemeRtlLayout>
 						{children}
-						<SettingDrawer />
+						<SettingsDrawer />
 					</ThemeRtlLayout>
 				</ThemeLocalization>
 			</ThemeContrast>
