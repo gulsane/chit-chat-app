@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
 import { alpha, styled } from "@mui/material/styles";
-import { m } from "framer-motion";
+import { Backdrop } from "@mui/material";
+import { AnimatePresence, m } from "framer-motion";
 import cssStyles from "../../utils/cssStyles";
 
 const NAVBAR = {
@@ -38,9 +40,33 @@ const RootStyle = styled(m.div)(({ theme }) => ({
 }));
 
 const SettingsDrawer = function () {
+	const [open, setOpen] = useState(true);
+
+	useEffect(() => {
+		if (open) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "";
+		}
+	}, [open]);
+
+	const handleClose = () => {
+		setOpen(false);
+	};
+
 	return (
 		<>
-			<RootStyle>setting drawer</RootStyle>
+			<Backdrop
+				open={open}
+				onClick={handleClose}
+				sx={{
+					background: "transparent",
+					zIndex: (theme) => theme.zIndex.drawer + 1,
+				}}
+			/>
+			<AnimatePresence>
+				<RootStyle>setting drawer</RootStyle>
+			</AnimatePresence>
 		</>
 	);
 };
