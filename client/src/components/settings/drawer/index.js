@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { alpha, styled } from "@mui/material/styles";
 import { Backdrop, IconButton, Stack, Typography } from "@mui/material";
 import { AnimatePresence, m } from "framer-motion";
-import cssStyles from "../../utils/cssStyles";
-import Iconify from "../Iconify";
+import cssStyles from "../../../utils/cssStyles";
+import Iconify from "../../Iconify";
 
 const NAVBAR = {
 	BASE_WIDTH: 260,

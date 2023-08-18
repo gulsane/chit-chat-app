@@ -3,7 +3,7 @@ import ThemeColorPresets from "./ThemeColorPresets";
 import ThemeContrast from "./ThemeContrast";
 import ThemeLocalization from "./ThemeLocalization";
 import ThemeRtlLayout from "./ThemeRtlLayout";
-import SettingsDrawer from "../drawer";
+import SettingsDrawer from "./drawer";
 
 ThemeSettings.propTypes = {
 	children: PropTypes.node.isRequired,
