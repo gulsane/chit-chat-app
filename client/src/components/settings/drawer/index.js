@@ -17,6 +17,7 @@ import Scrollbar from "../../Scrollbar";
 import ToggleButton from "./ToggleButton";
 import SettingDirection from "./SettingDirection";
 import SettingColorPresets from "./SettingColorPresets";
+import SettingFullscreen from "./SettingFullscreen";
 
 const RootStyle = styled(m.div)(({ theme }) => ({
 	...cssStyles(theme).bgBlur({
@@ -124,6 +125,7 @@ const SettingsDrawer = function () {
 									<Typography variant="subtitle2">Presets</Typography>
 									<SettingColorPresets />
 								</Stack>
+								<SettingFullscreen />
 							</Stack>
 						</Scrollbar>
 					</RootStyle>
