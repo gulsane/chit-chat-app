@@ -7,8 +7,24 @@ const routes = [
 		element: <AuthLayout />,
 		children: [
 			{
+				path: "login",
+				element: <h4>this login page needs to be implemented</h4>,
+			},
+			{
 				path: "register",
-				element: <h4>this is register page</h4>,
+				element: <h4>this register page needs to be implemented</h4>,
+			},
+			{
+				path: "reset-password",
+				element: <h4>this reset password page needs to be implemented</h4>,
+			},
+			{
+				path: "new-password",
+				element: <h4>this new password page needs to be implemented</h4>,
+			},
+			{
+				path: "verify",
+				element: <h4>this verify otp page needs to be implemented</h4>,
 			},
 		],
 	},
