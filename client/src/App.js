@@ -1,11 +1,12 @@
 import ThemeProvider from "./theme";
 import ThemeSettings from "./components/settings";
+import Router from "./routes";
 
 function App() {
 	return (
 		<ThemeProvider>
 			<ThemeSettings>
-				<h1>this is chatting app</h1>
+				<Router />
 			</ThemeSettings>
 		</ThemeProvider>
 	);
