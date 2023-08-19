@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AuthLayout from "../layouts/auth";
 
-const router = createBrowserRouter([
+const routes = [
 	{
 		path: "/auth",
 		element: <AuthLayout />,
@@ -13,7 +13,9 @@ const router = createBrowserRouter([
 		],
 	},
 	{ path: "/", element: <h1>this is chatting app</h1> },
-]);
+];
+
+const router = createBrowserRouter(routes);
 
 export default function Router() {
 	return <RouterProvider router={router} />;
