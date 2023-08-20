@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AuthLayout from "../layouts/auth";
+import Register from "../pages/auth/Register";
 
 const routes = [
 	{
@@ -12,7 +13,7 @@ const routes = [
 			},
 			{
 				path: "register",
-				element: <h4>this register page needs to be implemented</h4>,
+				element: <Register />,
 			},
 			{
 				path: "reset-password",
