@@ -12,25 +12,10 @@ import {
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FormProvider as Form } from "react-hook-form";
 import { Eye, EyeSlash } from "phosphor-react";
 import { LoadingButton } from "@mui/lab";
-import PropTypes from "prop-types";
 import RHFTextField from "../../components/hook-form/RHFTextField";
-
-const FormProvider = ({ children, onSubmit, methods }) => {
-	return (
-		<Form {...methods}>
-			<form onSubmit={onSubmit}>{children}</form>
-		</Form>
-	);
-};
-
-FormProvider.propTypes = {
-	children: PropTypes.node,
-	methods: PropTypes.object,
-	onSubmit: PropTypes.func,
-};
+import FormProvider from "../../components/hook-form/FormProvider";
 
 const RegisterForm = () => {
 	const isLoading = false;
