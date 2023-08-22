@@ -37,7 +37,7 @@ const sendNodemailerGmail = async ({
 	}
 };
 
-exports.sendEmail = async (args) => {
+module.exports = sendEmail = async (args) => {
 	if (process.env.NODE_ENV === "development") {
 		return Promise.resolve();
 	} else {
