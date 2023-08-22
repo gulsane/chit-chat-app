@@ -1,16 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-const baseURL = "http://localhost:3001";
-
-const axiosInstance = axios.create({ baseURL: baseURL });
-
-axiosInstance.interceptors.response.use(
-	(response) => response,
-	(error) =>
-		Promise.reject(
-			(error.response && error.response.data) || "Something went wrong"
-		)
-);
+import axios from "../../utils/axios";
 
 const initialState = {
 	isLoading: false,
@@ -36,7 +25,7 @@ export default slice.reducer;
 
 export const RegisterUser = (formValues) => async (dispatch, getState) => {
 	dispatch(slice.actions.updateIsLoading({ isLoading: true, error: false }));
-	await axiosInstance
+	await axios
 		.post(
 			"/auth/register",
 			{ ...formValues },
