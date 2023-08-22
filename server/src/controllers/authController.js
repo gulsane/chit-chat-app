@@ -11,14 +11,15 @@ const { promisify } = require("util");
 const signToken = (userId) => jwt.sign({ userId }, process.env.JWT_SECRET);
 
 const register = catchAsync(async (req, res, next) => {
-	const filteredBody = filterObj(req.body, [
+	const filteredBody = filterObj(
+		req.body,
 		"firstName",
 		"lastName",
 		"email",
-		"password",
-	]);
+		"password"
+	);
 
-	const existing_user = User.findOne({ email: filteredBody.email });
+	const existing_user = await User.findOne({ email: filteredBody.email });
 
 	if (existing_user && existing_user.verified) {
 		res.status(400).json({
@@ -42,7 +43,6 @@ const register = catchAsync(async (req, res, next) => {
 
 const sendOTP = catchAsync(async (req, res, next) => {
 	const { user_id } = req;
-
 	const new_otp = otpGenerator.generate(6, {
 		upperCaseAlphabets: false,
 		specialChars: false,
