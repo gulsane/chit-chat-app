@@ -5,10 +5,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Stack, Alert, IconButton, InputAdornment } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { Eye, EyeSlash } from "phosphor-react";
+import { useDispatch } from "react-redux";
 import RHFTextField from "../../components/hook-form/RHFTextField";
 import FormProvider from "../../components/hook-form/FormProvider";
+import { RegisterUser } from "../../redux/slices/auth";
 
 const RegisterForm = () => {
+	const dispatch = useDispatch();
 	const isLoading = false;
 	const [showPassword, setShowPassword] = useState(false);
 
@@ -43,6 +46,7 @@ const RegisterForm = () => {
 	const onSubmit = async (data) => {
 		try {
 			// submit data to backend
+			dispatch(RegisterUser({ ...data }));
 		} catch (error) {
 			console.error(error);
 			reset();
