@@ -38,5 +38,9 @@ export const RegisterUser = (formValues) => async (dispatch, getState) => {
 		.catch((error) => {
 			console.log(error);
 		})
-		.finally(() => {});
+		.finally(() => {
+			if (!getState().auth.error) {
+				window.location.href = "/auth/verify";
+			}
+		});
 };
