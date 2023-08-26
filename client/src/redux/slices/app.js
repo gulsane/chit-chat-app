@@ -30,7 +30,7 @@ export const closeSnackBar = () => async (dispatch, getState) => {
 	dispatch(slice.actions.closeSnackBar());
 };
 
-export const openSnackBar =
+export const showSnackBar =
 	({ severity, message }) =>
 	async (dispatch) => {
 		dispatch(slice.actions.openSnackBar({ severity, message }));
