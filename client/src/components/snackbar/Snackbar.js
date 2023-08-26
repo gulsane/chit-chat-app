@@ -10,7 +10,6 @@ const Alert = forwardRef(function (props, ref) {
 const AppSnackbar = () => {
 	const dispatch = useDispatch();
 	const { open, message, severity } = useSelector((state) => state.app.snackbar);
-	console.log(open, message, severity);
 	return open ? (
 		<Snackbar
 			open={open}
