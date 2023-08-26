@@ -21,7 +21,7 @@ const register = catchAsync(async (req, res, next) => {
 
 	const existing_user = await User.findOne({ email: filteredBody.email });
 
-	if (existing_user && existing_user.verified) {
+	if (existing_user && existing_user.profileVerified) {
 		res.status(400).json({
 			status: "error",
 			message: "Email already in use, Please login",
