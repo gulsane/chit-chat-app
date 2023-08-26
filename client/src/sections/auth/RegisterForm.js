@@ -21,7 +21,10 @@ const RegisterForm = () => {
 		email: Yup.string()
 			.required("Email is required")
 			.email("Email must be a valid email address"),
-		password: Yup.string().required("Password is required"),
+		password: Yup.string()
+			.min(8, "password must be between 8 to 16 characters")
+			.max(16, "password must be between 8 to 16 characters")
+			.required("Password is required"),
 	});
 
 	const defaultValues = {
