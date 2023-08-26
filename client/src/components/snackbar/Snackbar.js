@@ -1,24 +1,31 @@
-import React, { useState } from "react";
-import { Alert, Snackbar } from "@mui/material";
+import { Alert as MuiAlert, Snackbar } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { closeSnackBar } from "../../redux/slices/app";
+import { forwardRef } from "react";
+
+const Alert = forwardRef(function (props, ref) {
+	return <MuiAlert {...props} ref={ref} />;
+});
 
 const AppSnackbar = () => {
-	const [open, setOpen] = useState(true);
-	const message = "this  is deraulst masseasdf";
-	const handleClose = () => {
-		setOpen(false);
-	};
-	const severity = "success";
+	const dispatch = useDispatch();
+	const { open, message, severity } = useSelector((state) => state.app.snackbar);
+	console.log(open, message, severity);
 	return open ? (
 		<Snackbar
 			open={open}
-			onClose={handleClose}
+			onClose={() => {
+				dispatch(closeSnackBar());
+			}}
 			key={"bottomcenter"}
 			autoHideDuration={6000}
 			anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
 		>
 			<Alert
 				severity={severity}
-				onClose={handleClose}
+				onClose={() => {
+					dispatch(closeSnackBar());
+				}}
 				sx={{ width: "100%" }}
 				elevation={6}
 				variant="filled"
