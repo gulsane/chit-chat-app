@@ -25,3 +25,16 @@ const slice = createSlice({
 });
 
 export default slice.reducer;
+
+export const closeSnackBar = () => async (dispatch, getState) => {
+	dispatch(slice.actions.closeSnackBar());
+};
+
+export const openSnackBar =
+	({ severity, message }) =>
+	async (dispatch) => {
+		dispatch(slice.actions.openSnackBar({ severity, message }));
+		setTimeout(() => {
+			dispatch(slice.actions.closeSnackBar());
+		}, 4000);
+	};
