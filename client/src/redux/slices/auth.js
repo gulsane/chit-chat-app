@@ -6,6 +6,10 @@ const initialState = {
 	isLoading: false,
 	email: "",
 	error: null,
+	isLoggedIn: false,
+	token: null,
+	user: null,
+	user_id: null,
 };
 
 const slice = createSlice({
@@ -18,6 +22,11 @@ const slice = createSlice({
 		},
 		updateRegisteredEmail(state, action) {
 			state.email = action.payload.email;
+		},
+		logIn(state, action) {
+			state.isLoggedIn = action.payload.isLoggedIn;
+			state.token = action.payload.token;
+			state.user_id = action.payload.user_id;
 		},
 	},
 });
