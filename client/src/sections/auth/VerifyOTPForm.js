@@ -5,7 +5,13 @@ import FormProvider from "../../components/hook-form";
 import { Button, Stack } from "@mui/material";
 import { RHFCodes } from "../../components/hook-form";
 
+import { useDispatch, useSelector } from "react-redux";
+import { VerifyEmail } from "../../redux/slices/auth";
+
 const VerifyOTPForm = () => {
+	const dispatch = useDispatch();
+	const { email } = useSelector((state) => state.auth);
+
 	const VerifyCodeSchema = Yup.object().shape({
 		code1: Yup.string().required("Code is required"),
 		code2: Yup.string().required("Code is required"),
@@ -34,8 +40,12 @@ const VerifyOTPForm = () => {
 
 	const onSubmit = async (data) => {
 		try {
-			//   Send API Request
-			console.log(data);
+			dispatch(
+				VerifyEmail({
+					email,
+					otp: `${data.code1}${data.code2}${data.code3}${data.code4}${data.code5}${data.code6}`,
+				})
+			);
 		} catch (error) {
 			console.error(error);
 		}
