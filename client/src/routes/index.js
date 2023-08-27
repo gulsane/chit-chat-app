@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AuthLayout from "../layouts/auth";
 import Register from "../pages/auth/Register";
-
+import VerifyOTP from "../pages/auth/VerifyOTP";
 const routes = [
 	{
 		path: "/auth",
@@ -24,8 +24,8 @@ const routes = [
 				element: <h4>this new password page needs to be implemented</h4>,
 			},
 			{
-				path: "verify",
-				element: <h4>this verify otp page needs to be implemented</h4>,
+				path: "verify-otp",
+				element: <VerifyOTP />,
 			},
 		],
 	},
