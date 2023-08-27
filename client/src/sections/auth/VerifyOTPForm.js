@@ -44,7 +44,6 @@ const VerifyOTPForm = () => {
 	return (
 		<FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
 			<Stack spacing={3}>
-				Inputs for codes need to be added
 				<RHFCodes
 					keyName="code"
 					inputs={["code1", "code2", "code3", "code4", "code5", "code6"]}
