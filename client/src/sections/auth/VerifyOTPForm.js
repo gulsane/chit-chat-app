@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormProvider from "../../components/hook-form";
 import { Button, Stack } from "@mui/material";
+import { RHFCodes } from "../../components/hook-form";
 
 const VerifyOTPForm = () => {
 	const VerifyCodeSchema = Yup.object().shape({
@@ -31,12 +32,23 @@ const VerifyOTPForm = () => {
 
 	const { handleSubmit } = methods;
 
-	const onSubmit = async (data) => {};
+	const onSubmit = async (data) => {
+		try {
+			//   Send API Request
+			console.log(data);
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	return (
 		<FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
 			<Stack spacing={3}>
 				Inputs for codes need to be added
+				<RHFCodes
+					keyName="code"
+					inputs={["code1", "code2", "code3", "code4", "code5", "code6"]}
+				/>
 				<Button
 					fullWidth
 					size="large"
