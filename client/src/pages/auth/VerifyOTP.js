@@ -1,4 +1,5 @@
 import { Stack, Typography } from "@mui/material";
+import VerifyOTPForm from "../../sections/auth/VerifyOTPForm";
 
 const VerifyOTP = () => {
 	const DEFAULT_EMAIL = "email@123";
@@ -11,6 +12,7 @@ const VerifyOTP = () => {
 						OTP successfully sent to email ({DEFAULT_EMAIL})
 					</Typography>
 				</Stack>
+				<VerifyOTPForm />
 			</Stack>
 		</>
 	);
