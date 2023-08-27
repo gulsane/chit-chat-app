@@ -59,7 +59,47 @@ export const RegisterUser = (formValues) => async (dispatch, getState) => {
 		})
 		.finally(() => {
 			if (!getState().auth.error) {
-				window.location.href = "/auth/verify";
+				window.location.href = "/auth/verify-otp";
 			}
 		});
 };
+
+export function VerifyEmail(formValues) {
+	return async (dispatch) => {
+		dispatch(slice.actions.updateIsLoading({ isLoading: true, error: false }));
+
+		await axios
+			.post(
+				"/auth/verify-otp",
+				{
+					...formValues,
+				},
+				{
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			)
+			.then(function (response) {
+				console.log(response);
+				dispatch(slice.actions.updateRegisteredEmail({ email: "" }));
+				window.localStorage.setItem("user_id", response.data.user_id);
+				dispatch(
+					slice.actions.logIn({
+						isLoggedIn: true,
+						token: response.data.token,
+					})
+				);
+
+				dispatch(
+					showSnackBar({ severity: "success", message: response.data.message })
+				);
+				dispatch(slice.actions.updateIsLoading({ isLoading: false, error: false }));
+			})
+			.catch(function (error) {
+				console.log(error);
+				dispatch(showSnackBar({ severity: "error", message: error.message }));
+				dispatch(slice.actions.updateIsLoading({ error: true, isLoading: false }));
+			});
+	};
+}
