@@ -87,7 +87,7 @@ const verifyOTP = catchAsync(async (req, res, next) => {
 		});
 	}
 
-	if (user.verified) {
+	if (user.profileVerified) {
 		res.status(400).json({
 			status: "error",
 			message: "Email is already verified, please login",
@@ -102,7 +102,7 @@ const verifyOTP = catchAsync(async (req, res, next) => {
 		return;
 	}
 
-	user.verified = true;
+	user.profileVerified = true;
 	user.otp = undefined;
 	await user.save({ new: true, validateModifiedOnly: true });
 
