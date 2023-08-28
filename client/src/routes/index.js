@@ -1,7 +1,21 @@
+import { Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AuthLayout from "../layouts/auth";
 import Register from "../pages/auth/Register";
 import VerifyOTP from "../pages/auth/VerifyOTP";
+
+const LoadingScreen = () => {
+	return <h4>loading....</h4>;
+};
+
+const Loadable = (Component) => (props) => {
+	return (
+		<Suspense fallback={LoadingScreen}>
+			<Component {...props} />
+		</Suspense>
+	);
+};
+
 const routes = [
 	{
 		path: "/auth",
