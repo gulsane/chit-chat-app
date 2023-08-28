@@ -1,6 +1,7 @@
 import { Suspense, lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AuthLayout from "../layouts/auth";
+import DashboardLayout from "../layouts/dashboard";
 
 const LoadingScreen = () => {
 	return <h4>loading....</h4>;
@@ -44,7 +45,7 @@ const routes = [
 			},
 		],
 	},
-	{ path: "/", element: <h1>this is chatting app</h1> },
+	{ path: "/", element: <DashboardLayout /> },
 ];
 
 const router = createBrowserRouter(routes);
