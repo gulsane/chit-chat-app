@@ -1,8 +1,6 @@
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AuthLayout from "../layouts/auth";
-import Register from "../pages/auth/Register";
-import VerifyOTP from "../pages/auth/VerifyOTP";
 
 const LoadingScreen = () => {
 	return <h4>loading....</h4>;
@@ -10,11 +8,14 @@ const LoadingScreen = () => {
 
 const Loadable = (Component) => (props) => {
 	return (
-		<Suspense fallback={LoadingScreen}>
+		<Suspense fallback={<LoadingScreen />}>
 			<Component {...props} />
 		</Suspense>
 	);
 };
+
+const RegisterPage = Loadable(lazy(() => import("../pages/auth/Register")));
+const VerifyOTPPage = Loadable(lazy(() => import("../pages/auth/VerifyOTP")));
 
 const routes = [
 	{
@@ -27,7 +28,7 @@ const routes = [
 			},
 			{
 				path: "register",
-				element: <Register />,
+				element: <RegisterPage />,
 			},
 			{
 				path: "reset-password",
@@ -39,7 +40,7 @@ const routes = [
 			},
 			{
 				path: "verify-otp",
-				element: <VerifyOTP />,
+				element: <VerifyOTPPage />,
 			},
 		],
 	},
