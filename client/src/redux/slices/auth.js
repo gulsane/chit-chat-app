@@ -81,7 +81,6 @@ export function VerifyEmail(formValues) {
 				}
 			)
 			.then(function (response) {
-				console.log(response);
 				dispatch(slice.actions.updateRegisteredEmail({ email: "" }));
 				window.localStorage.setItem("user_id", response.data.user_id);
 				dispatch(
@@ -97,7 +96,6 @@ export function VerifyEmail(formValues) {
 				dispatch(slice.actions.updateIsLoading({ isLoading: false, error: false }));
 			})
 			.catch(function (error) {
-				console.log(error);
 				dispatch(showSnackBar({ severity: "error", message: error.message }));
 				dispatch(slice.actions.updateIsLoading({ error: true, isLoading: false }));
 			});
