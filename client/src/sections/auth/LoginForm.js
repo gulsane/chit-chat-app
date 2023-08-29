@@ -1,10 +1,14 @@
+import { useState } from "react";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 
-import FormProvider from "../../components/hook-form";
+import FormProvider, { RHFTextField } from "../../components/hook-form";
+import { IconButton, InputAdornment, Stack } from "@mui/material";
+import { Eye, EyeSlash } from "phosphor-react";
 
 const LoginForm = () => {
+	const [showPassword, setShowPassword] = useState(false);
 	const loginSchema = Yup.object().shape({
 		email: Yup.string()
 			.required("Email is required")
@@ -41,10 +45,25 @@ const LoginForm = () => {
 		}
 	};
 	return (
-		<FormProvider
-			methods={methods}
-			onSubmit={handleSubmit(onSubmit)}
-		></FormProvider>
+		<FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+			<Stack spacing={3}>
+				<RHFTextField name="email" type="text" label="Email address" />
+				<RHFTextField
+					name="password"
+					label="Password"
+					type={showPassword ? "text" : "password"}
+					InputProps={{
+						endAdornment: (
+							<InputAdornment position="end">
+								<IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
+									{showPassword ? <Eye /> : <EyeSlash />}
+								</IconButton>
+							</InputAdornment>
+						),
+					}}
+				/>
+			</Stack>
+		</FormProvider>
 	);
 };
 
