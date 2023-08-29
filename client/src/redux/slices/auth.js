@@ -109,17 +109,16 @@ export const LoginUser = (formValues) => async (dispatch, getState) => {
 			{ headers: { "Content-Type": "application/json" } }
 		)
 		.then((response) => {
+			const { token, user_id, message } = response.data;
 			dispatch(
 				slice.actions.logIn({
 					isLoggedIn: true,
-					token: response.data.token,
-					user_id: response.data.user_id,
+					token: token,
+					user_id: user_id,
 				})
 			);
-			window.localStorage.setItem("user_id".response.data.user_id);
-			dispatch(
-				showSnackBar({ severity: "success", message: response.data.message })
-			);
+			window.localStorage.setItem("user_id", user_id);
+			dispatch(showSnackBar({ severity: "success", message: message }));
 			dispatch(slice.actions.updateIsLoading({ isLoading: false, error: false }));
 		})
 		.catch((error) => {
