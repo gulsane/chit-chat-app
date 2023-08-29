@@ -90,7 +90,7 @@ userSchema.pre("save", async function (next) {
 		return next();
 	}
 
-	this.password = await bcrypt.hash(this.password, 12);
+	this.password = await bcrypt.hash(this.password.toString(), 12);
 
 	next();
 });
