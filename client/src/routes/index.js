@@ -17,6 +17,7 @@ const Loadable = (Component) => (props) => {
 
 const RegisterPage = Loadable(lazy(() => import("../pages/auth/Register")));
 const VerifyOTPPage = Loadable(lazy(() => import("../pages/auth/VerifyOTP")));
+const LoginPage = Loadable(lazy(() => import("../pages/auth/Login")));
 
 const routes = [
 	{
@@ -25,7 +26,7 @@ const routes = [
 		children: [
 			{
 				path: "login",
-				element: <h4>this login page needs to be implemented</h4>,
+				element: <LoginPage />,
 			},
 			{
 				path: "register",
