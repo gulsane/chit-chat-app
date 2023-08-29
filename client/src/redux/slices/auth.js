@@ -101,3 +101,31 @@ export function VerifyEmail(formValues) {
 			});
 	};
 }
+
+export const LoginUser = (formValues) => async (dispatch, getState) => {
+	dispatch(slice.actions.updateIsLoading({ isLoading: true, error: false }));
+	await axios
+		.post(
+			"auth/login",
+			{ ...formValues },
+			{ headers: { "Content-Type": "application/json" } }
+		)
+		.then((response) => {
+			dispatch(
+				slice.actions.logIn({
+					isLoggedIn: true,
+					token: response.data.token,
+					user_id: response.data.user_id,
+				})
+			);
+			window.localStorage.setItem("user_id".response.data.user_id);
+			dispatch(
+				showSnackBar({ severity: "success", message: response.data.message })
+			);
+			dispatch(slice.actions.updateIsLoading({ isLoading: false, error: false }));
+		})
+		.catch((error) => {
+			dispatch(showSnackBar({ severity: "error", message: error.message }));
+			dispatch(slice.actions.updateIsLoading({ isLoading: false, error: true }));
+		});
+};
