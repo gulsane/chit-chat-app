@@ -1,5 +1,19 @@
+import { Stack, Typography, Link } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
+
 const Login = () => {
-	return <div>This is the login page and need to be implemented</div>;
+	return (
+		<Stack spacing={2} sx={{ mb: 5, position: "relative" }}>
+			<Typography variant="h4">Login to chit-chat</Typography>
+			<Stack direction="row" spacing={0.5}>
+				<Typography variant="body2">New user?</Typography>
+
+				<Link to={"/auth/register"} component={RouterLink} variant="subtitle2">
+					Create an account
+				</Link>
+			</Stack>
+		</Stack>
+	);
 };
 
 export default Login;
