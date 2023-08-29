@@ -64,43 +64,41 @@ export const RegisterUser = (formValues) => async (dispatch, getState) => {
 		});
 };
 
-export function VerifyEmail(formValues) {
-	return async (dispatch) => {
-		dispatch(slice.actions.updateIsLoading({ isLoading: true, error: false }));
+export const VerifyEmail = (formValues) => async (dispatch) => {
+	dispatch(slice.actions.updateIsLoading({ isLoading: true, error: false }));
 
-		await axios
-			.post(
-				"/auth/verify-otp",
-				{
-					...formValues,
+	await axios
+		.post(
+			"/auth/verify-otp",
+			{
+				...formValues,
+			},
+			{
+				headers: {
+					"Content-Type": "application/json",
 				},
-				{
-					headers: {
-						"Content-Type": "application/json",
-					},
-				}
-			)
-			.then(function (response) {
-				dispatch(slice.actions.updateRegisteredEmail({ email: "" }));
-				window.localStorage.setItem("user_id", response.data.user_id);
-				dispatch(
-					slice.actions.logIn({
-						isLoggedIn: true,
-						token: response.data.token,
-					})
-				);
+			}
+		)
+		.then(function (response) {
+			dispatch(slice.actions.updateRegisteredEmail({ email: "" }));
+			window.localStorage.setItem("user_id", response.data.user_id);
+			dispatch(
+				slice.actions.logIn({
+					isLoggedIn: true,
+					token: response.data.token,
+				})
+			);
 
-				dispatch(
-					showSnackBar({ severity: "success", message: response.data.message })
-				);
-				dispatch(slice.actions.updateIsLoading({ isLoading: false, error: false }));
-			})
-			.catch(function (error) {
-				dispatch(showSnackBar({ severity: "error", message: error.message }));
-				dispatch(slice.actions.updateIsLoading({ error: true, isLoading: false }));
-			});
-	};
-}
+			dispatch(
+				showSnackBar({ severity: "success", message: response.data.message })
+			);
+			dispatch(slice.actions.updateIsLoading({ isLoading: false, error: false }));
+		})
+		.catch(function (error) {
+			dispatch(showSnackBar({ severity: "error", message: error.message }));
+			dispatch(slice.actions.updateIsLoading({ error: true, isLoading: false }));
+		});
+};
 
 export const LoginUser = (formValues) => async (dispatch, getState) => {
 	dispatch(slice.actions.updateIsLoading({ isLoading: true, error: false }));
