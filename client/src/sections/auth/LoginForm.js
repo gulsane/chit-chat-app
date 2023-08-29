@@ -2,17 +2,19 @@ import { useState } from "react";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-
-import FormProvider, { RHFTextField } from "../../components/hook-form";
 import { IconButton, InputAdornment, Link, Stack } from "@mui/material";
 import { Eye, EyeSlash } from "phosphor-react";
 import { LoadingButton } from "@mui/lab";
 import { Link as RouterLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import FormProvider, { RHFTextField } from "../../components/hook-form";
+import { LoginUser } from "../../redux/slices/auth";
 
 const LoginForm = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const { isLoading } = useSelector((state) => state.auth);
+	const dispatch = useDispatch();
 	const loginSchema = Yup.object().shape({
 		email: Yup.string()
 			.required("Email is required")
@@ -37,8 +39,7 @@ const LoginForm = () => {
 
 	const onSubmit = async (data) => {
 		try {
-			console.log(data);
-			// submit data to backend
+			dispatch(LoginUser(data));
 		} catch (error) {
 			console.error(error);
 			reset();
