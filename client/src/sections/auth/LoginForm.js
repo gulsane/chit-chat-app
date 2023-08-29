@@ -8,9 +8,11 @@ import { IconButton, InputAdornment, Link, Stack } from "@mui/material";
 import { Eye, EyeSlash } from "phosphor-react";
 import { LoadingButton } from "@mui/lab";
 import { Link as RouterLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const LoginForm = () => {
 	const [showPassword, setShowPassword] = useState(false);
+	const { isLoading } = useSelector((state) => state.auth);
 	const loginSchema = Yup.object().shape({
 		email: Yup.string()
 			.required("Email is required")
@@ -82,7 +84,7 @@ const LoginForm = () => {
 				size="large"
 				type="submit"
 				variant="contained"
-				loading={false}
+				loading={isLoading}
 				sx={{
 					bgcolor: "text.primary",
 					color: (theme) =>
