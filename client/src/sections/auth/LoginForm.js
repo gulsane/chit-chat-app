@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import FormProvider, { RHFTextField } from "../../components/hook-form";
 import { IconButton, InputAdornment, Stack } from "@mui/material";
 import { Eye, EyeSlash } from "phosphor-react";
+import { LoadingButton } from "@mui/lab";
 
 const LoginForm = () => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -62,6 +63,26 @@ const LoginForm = () => {
 						),
 					}}
 				/>
+				<LoadingButton
+					fullWidth
+					color="inherit"
+					size="large"
+					type="submit"
+					variant="contained"
+					loading={false}
+					sx={{
+						bgcolor: "text.primary",
+						color: (theme) =>
+							theme.palette.mode === "light" ? "common.white" : "grey.800",
+						"&:hover": {
+							bgcolor: "text.primary",
+							color: (theme) =>
+								theme.palette.mode === "light" ? "common.white" : "grey.800",
+						},
+					}}
+				>
+					Login
+				</LoadingButton>
 			</Stack>
 		</FormProvider>
 	);
