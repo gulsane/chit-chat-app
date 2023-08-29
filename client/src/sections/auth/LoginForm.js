@@ -63,27 +63,27 @@ const LoginForm = () => {
 						),
 					}}
 				/>
-				<LoadingButton
-					fullWidth
-					color="inherit"
-					size="large"
-					type="submit"
-					variant="contained"
-					loading={false}
-					sx={{
+			</Stack>
+			<LoadingButton
+				fullWidth
+				color="inherit"
+				size="large"
+				type="submit"
+				variant="contained"
+				loading={false}
+				sx={{
+					bgcolor: "text.primary",
+					color: (theme) =>
+						theme.palette.mode === "light" ? "common.white" : "grey.800",
+					"&:hover": {
 						bgcolor: "text.primary",
 						color: (theme) =>
 							theme.palette.mode === "light" ? "common.white" : "grey.800",
-						"&:hover": {
-							bgcolor: "text.primary",
-							color: (theme) =>
-								theme.palette.mode === "light" ? "common.white" : "grey.800",
-						},
-					}}
-				>
-					Login
-				</LoadingButton>
-			</Stack>
+					},
+				}}
+			>
+				Login
+			</LoadingButton>
 		</FormProvider>
 	);
 };
