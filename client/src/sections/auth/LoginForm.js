@@ -4,9 +4,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 
 import FormProvider, { RHFTextField } from "../../components/hook-form";
-import { IconButton, InputAdornment, Stack } from "@mui/material";
+import { IconButton, InputAdornment, Link, Stack } from "@mui/material";
 import { Eye, EyeSlash } from "phosphor-react";
 import { LoadingButton } from "@mui/lab";
+import { Link as RouterLink } from "react-router-dom";
 
 const LoginForm = () => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -63,6 +64,17 @@ const LoginForm = () => {
 						),
 					}}
 				/>
+			</Stack>
+			<Stack alignItems="flex-end" sx={{ my: 2 }}>
+				<Link
+					component={RouterLink}
+					to="/auth/reset-password"
+					variant="body2"
+					color="inherit"
+					underline="always"
+				>
+					Forgot password?
+				</Link>
 			</Stack>
 			<LoadingButton
 				fullWidth
