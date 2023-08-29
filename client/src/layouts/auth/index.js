@@ -1,9 +1,17 @@
 import { Container, Stack } from "@mui/material";
 import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 import Logo from "../../assets/Images/logo.ico";
 
 const AuthLayout = () => {
+	const { isLoggedIn } = useSelector((state) => state.auth);
+
+	if (isLoggedIn) {
+		return <Navigate to={"/"} />;
+	}
+
 	return (
 		<>
 			<Container sx={{ mt: 5 }} maxWidth="sm">
