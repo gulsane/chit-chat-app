@@ -1,6 +1,7 @@
 import { Stack, Typography, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { CaretLeft } from "phosphor-react";
+import ResetPasswordForm from "../../sections/auth/ResetPasswordForm";
 
 const ResetPassword = () => {
 	return (
@@ -15,7 +16,7 @@ const ResetPassword = () => {
 					email you a link to reset your password.
 				</Typography>
 			</Stack>
-			//RESET PASSWORD FORM IMPLEMENTATION HERE NEEDED
+			<ResetPasswordForm />
 			<Link
 				component={RouterLink}
 				to={"/auth/login"}
