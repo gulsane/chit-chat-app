@@ -26,19 +26,16 @@ const register = catchAsync(async (req, res, next) => {
 			status: "error",
 			message: "Email already in use, Please login",
 		});
-	} else if (existing_user) {
-		await User.findOneAndUpdate(
-			{ email: filteredBody.email },
-			{ ...filteredBody },
-			{ new: true, validateModifiedOnly: true }
-		);
-		req.user_id = existing_user._id;
-		next();
-	} else {
-		const new_user = await User.create({ ...filteredBody });
-		req.user_id = new_user._id;
-		next();
+		return;
 	}
+
+	if (existing_user) {
+		await User.findByIdAndDelete({ _id: existing_user._id.toString() });
+	}
+
+	const new_user = await User.create({ ...filteredBody });
+	req.user_id = new_user._id;
+	next();
 });
 
 const sendOTP = catchAsync(async (req, res, next) => {
@@ -83,7 +80,7 @@ const verifyOTP = catchAsync(async (req, res, next) => {
 	if (!user) {
 		res.status(400).json({
 			status: "error",
-			message: "Email is invalid of OTP expired",
+			message: "Email is invalid or OTP expired",
 		});
 	}
 
@@ -131,7 +128,7 @@ const login = catchAsync(async (req, res, next) => {
 	if (!user || !(await user.isCorrectPassword(password, user.password))) {
 		res.status(400).json({
 			status: "error",
-			message: "Email or Password is correct",
+			message: "Email or Password is incorrect",
 		});
 		return;
 	}
