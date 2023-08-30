@@ -126,3 +126,30 @@ export const LoginUser = (formValues) => async (dispatch, getState) => {
 			dispatch(slice.actions.updateIsLoading({ isLoading: false, error: true }));
 		});
 };
+
+export const ForgotPassword = (formValues) => async (dispatch) => {
+	dispatch(slice.actions.updateIsLoading({ isLoading: true, error: false }));
+
+	await axios
+		.post(
+			"/auth/forgot-password",
+			{
+				...formValues,
+			},
+			{
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		)
+		.then(function (response) {
+			dispatch(
+				showSnackBar({ severity: "success", message: response.data.message })
+			);
+			dispatch(slice.actions.updateIsLoading({ isLoading: false, error: false }));
+		})
+		.catch(function (error) {
+			dispatch(showSnackBar({ severity: "error", message: error.message }));
+			dispatch(slice.actions.updateIsLoading({ isLoading: false, error: true }));
+		});
+};
