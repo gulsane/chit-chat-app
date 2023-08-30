@@ -123,7 +123,9 @@ const login = catchAsync(async (req, res, next) => {
 		return;
 	}
 
-	const user = await User.findOne({ email }).select("+password");
+	const user = await User.findOne({ email, profileVerified: true }).select(
+		"password"
+	);
 
 	if (!user || !(await user.isCorrectPassword(password, user.password))) {
 		res.status(400).json({
