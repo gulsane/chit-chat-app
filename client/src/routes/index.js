@@ -18,6 +18,9 @@ const Loadable = (Component) => (props) => {
 const RegisterPage = Loadable(lazy(() => import("../pages/auth/Register")));
 const VerifyOTPPage = Loadable(lazy(() => import("../pages/auth/VerifyOTP")));
 const LoginPage = Loadable(lazy(() => import("../pages/auth/Login")));
+const ResetPasswordPage = Loadable(
+	lazy(() => import("../pages/auth/ResetPassword"))
+);
 
 const routes = [
 	{
@@ -34,7 +37,7 @@ const routes = [
 			},
 			{
 				path: "reset-password",
-				element: <h4>this reset password page needs to be implemented</h4>,
+				element: <ResetPasswordPage />,
 			},
 			{
 				path: "new-password",
