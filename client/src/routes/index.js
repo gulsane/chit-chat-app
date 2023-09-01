@@ -52,7 +52,16 @@ const routes = [
 			},
 		],
 	},
-	{ path: "/", element: <DashboardLayout /> },
+	{
+		path: "/",
+		element: <DashboardLayout />,
+		children: [
+			{ path: "/app", element: <h4>this is general app page</h4> },
+			{ path: "/group", element: <h4>this is group page</h4> },
+			{ path: "/call", element: <h4>this is call page</h4> },
+			{ path: "/settings", element: <h4>this is settings page</h4> },
+		],
+	},
 ];
 
 const router = createBrowserRouter(routes);
