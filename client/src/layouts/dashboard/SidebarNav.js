@@ -32,7 +32,6 @@ const NAV_BUTTONS = [
 const SidebarNav = () => {
 	const dispatch = useDispatch();
 	const { tabIndex } = useSelector((state) => state.app);
-	console.log(tabIndex);
 	const theme = useTheme();
 	const navigate = useNavigate();
 
@@ -79,6 +78,7 @@ const SidebarNav = () => {
 						{NAV_BUTTONS.map((el) =>
 							el.index === tabIndex ? (
 								<Box
+									key={el.index}
 									sx={{
 										backgroundColor: theme.palette.primary.main,
 										borderRadius: 1.5,
@@ -96,6 +96,7 @@ const SidebarNav = () => {
 								</Box>
 							) : (
 								<Box
+									key={el.index}
 									sx={{
 										backgroundColor: "transparent",
 									}}
