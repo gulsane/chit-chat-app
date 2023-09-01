@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { IconButton, InputAdornment, Stack } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { Eye, EyeSlash } from "phosphor-react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import FormProvider, { RHFTextField } from "../../components/hook-form";
 import { NewPassword } from "../../redux/slices/auth";
@@ -14,6 +14,7 @@ const NewPasswordForm = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const dispatch = useDispatch();
 	const [queryParameters] = useSearchParams();
+	const { isLoading } = useSelector((state) => state.auth);
 
 	const VerifyCodeSchema = Yup.object().shape({
 		password: Yup.string()
@@ -77,7 +78,7 @@ const NewPasswordForm = () => {
 				/>
 				<LoadingButton
 					fullWidth
-					loading={false}
+					loading={isLoading}
 					size="large"
 					type="submit"
 					variant="contained"
