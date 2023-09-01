@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { Box, IconButton, Stack } from "@mui/material";
 import { ChatCircleDots, Gear, Phone, Users } from "phosphor-react";
+import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/Images/logo.ico";
 
 const NAV_BUTTONS = [
@@ -30,9 +31,11 @@ const NAV_BUTTONS = [
 const SidebarNav = () => {
 	const [tab, setTab] = useState(0);
 	const theme = useTheme();
+	const navigate = useNavigate();
 
-	const handleNavChange = (index) => {
+	const handleNavChange = (index, path) => {
 		setTab(index);
+		navigate(path);
 	};
 
 	return (
@@ -81,7 +84,7 @@ const SidebarNav = () => {
 								>
 									<IconButton
 										onClick={() => {
-											handleNavChange(el.index);
+											handleNavChange(el.index, el.path);
 										}}
 										sx={{ width: "max-content", color: "#ffffff" }}
 									>
@@ -97,7 +100,7 @@ const SidebarNav = () => {
 								>
 									<IconButton
 										onClick={() => {
-											handleNavChange(el.index);
+											handleNavChange(el.index, el.path);
 										}}
 										sx={{
 											width: "max-content",
