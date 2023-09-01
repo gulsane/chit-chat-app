@@ -153,3 +153,36 @@ export const ForgotPassword = (formValues) => async (dispatch) => {
 			dispatch(slice.actions.updateIsLoading({ isLoading: false, error: true }));
 		});
 };
+
+export const NewPassword = (formValues) => async (dispatch) => {
+	dispatch(slice.actions.updateIsLoading({ isLoading: true, error: false }));
+
+	await axios
+		.post(
+			"/auth/reset-password",
+			{
+				...formValues,
+			},
+			{
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		)
+		.then(function (response) {
+			dispatch(
+				slice.actions.logIn({
+					isLoggedIn: true,
+					token: response.data.token,
+				})
+			);
+			dispatch(
+				showSnackBar({ severity: "success", message: response.data.message })
+			);
+			dispatch(slice.actions.updateIsLoading({ isLoading: false, error: false }));
+		})
+		.catch(function (error) {
+			dispatch(showSnackBar({ severity: "error", message: error.message }));
+			dispatch(slice.actions.updateIsLoading({ isLoading: false, error: true }));
+		});
+};
