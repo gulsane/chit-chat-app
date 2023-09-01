@@ -1,5 +1,6 @@
 import { useTheme } from "@mui/material/styles";
-import { Box, Stack } from "@mui/material";
+import { Box, IconButton, Stack } from "@mui/material";
+import { ChatCircleDots, Phone, Users } from "phosphor-react";
 import Logo from "../../assets/Images/logo.ico";
 
 const SidebarNav = () => {
@@ -33,6 +34,49 @@ const SidebarNav = () => {
 					>
 						<img src={Logo} alt="chit-chat" />
 					</Box>
+					<Stack
+						sx={{ width: "max-content" }}
+						direction="column"
+						alignItems={"center"}
+						spacing={3}
+					>
+						<Box
+							sx={{ backgroundColor: theme.palette.primary.main, borderRadius: 1.5 }}
+							p={1}
+						>
+							{" "}
+							<IconButton
+								onClick={() => {}}
+								sx={{ width: "max-content", color: "#ffffff" }}
+							>
+								<ChatCircleDots />
+							</IconButton>
+						</Box>{" "}
+						<IconButton
+							onClick={() => {}}
+							sx={{
+								width: "max-content",
+								color:
+									theme.palette.mode === "loght"
+										? "#080707"
+										: theme.palette.text.primary,
+							}}
+						>
+							<Users />
+						</IconButton>
+						<IconButton
+							onClick={() => {}}
+							sx={{
+								width: "max-content",
+								color:
+									theme.palette.mode === "loght"
+										? "#080707"
+										: theme.palette.text.primary,
+							}}
+						>
+							<Phone />
+						</IconButton>
+					</Stack>
 				</Stack>
 			</Stack>
 		</Box>
