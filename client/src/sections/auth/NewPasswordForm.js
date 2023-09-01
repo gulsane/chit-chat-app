@@ -2,7 +2,8 @@ import { useState } from "react";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, IconButton, InputAdornment, Stack } from "@mui/material";
+import { IconButton, InputAdornment, Stack } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import { Eye, EyeSlash } from "phosphor-react";
 import FormProvider, { RHFTextField } from "../../components/hook-form";
 
@@ -65,8 +66,9 @@ const NewPasswordForm = () => {
 						),
 					}}
 				/>
-				<Button
+				<LoadingButton
 					fullWidth
+					loading={false}
 					size="large"
 					type="submit"
 					variant="contained"
@@ -83,7 +85,7 @@ const NewPasswordForm = () => {
 					}}
 				>
 					Update Password
-				</Button>
+				</LoadingButton>
 			</Stack>
 		</FormProvider>
 	);
