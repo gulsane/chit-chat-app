@@ -21,6 +21,9 @@ const LoginPage = Loadable(lazy(() => import("../pages/auth/Login")));
 const ResetPasswordPage = Loadable(
 	lazy(() => import("../pages/auth/ResetPassword"))
 );
+const NewPasswordPage = Loadable(
+	lazy(() => import("../pages/auth/NewPassword"))
+);
 
 const routes = [
 	{
@@ -41,7 +44,7 @@ const routes = [
 			},
 			{
 				path: "new-password",
-				element: <h4>this new password page needs to be implemented</h4>,
+				element: <NewPasswordPage />,
 			},
 			{
 				path: "verify-otp",
