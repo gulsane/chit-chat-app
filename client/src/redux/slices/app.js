@@ -6,6 +6,7 @@ const initialState = {
 		severity: null,
 		message: null,
 	},
+	tabIndex: 0,
 };
 
 const slice = createSlice({
@@ -20,6 +21,9 @@ const slice = createSlice({
 		closeSnackBar(state) {
 			state.snackbar.open = false;
 			state.snackbar.message = null;
+		},
+		updateTab(state, action) {
+			state.tabIndex = action.payload.tabIndex;
 		},
 	},
 });
@@ -38,3 +42,9 @@ export const showSnackBar =
 			dispatch(slice.actions.closeSnackBar());
 		}, 4000);
 	};
+
+export const UpdateTab = ({ tabIndex }) => {
+	return async (dispatch) => {
+		dispatch(slice.actions.updateTab({ tabIndex }));
+	};
+};
