@@ -1,9 +1,10 @@
-import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { Box, IconButton, Stack } from "@mui/material";
 import { ChatCircleDots, Gear, Phone, Users } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Logo from "../../assets/Images/logo.ico";
+import { UpdateTab } from "../../redux/slices/app";
 
 const NAV_BUTTONS = [
 	{
@@ -29,12 +30,14 @@ const NAV_BUTTONS = [
 ];
 
 const SidebarNav = () => {
-	const [tab, setTab] = useState(0);
+	const dispatch = useDispatch();
+	const { tabIndex } = useSelector((state) => state.app);
+	console.log(tabIndex);
 	const theme = useTheme();
 	const navigate = useNavigate();
 
-	const handleNavChange = (index, path) => {
-		setTab(index);
+	const handleNavChange = (tabIndex, path) => {
+		dispatch(UpdateTab({ tabIndex }));
 		navigate(path);
 	};
 
@@ -74,7 +77,7 @@ const SidebarNav = () => {
 						spacing={3}
 					>
 						{NAV_BUTTONS.map((el) =>
-							el.index === tab ? (
+							el.index === tabIndex ? (
 								<Box
 									sx={{
 										backgroundColor: theme.palette.primary.main,
