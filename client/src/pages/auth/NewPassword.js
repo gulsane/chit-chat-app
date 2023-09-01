@@ -1,6 +1,7 @@
 import { Stack, Typography, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { CaretLeft } from "phosphor-react";
+import NewPasswordForm from "../../sections/auth/NewPasswordForm";
 
 const NewPassword = () => {
 	return (
@@ -13,7 +14,7 @@ const NewPassword = () => {
 					Set your new password
 				</Typography>
 			</Stack>
-			new password form needs to be added
+			<NewPasswordForm />
 			<Link
 				component={RouterLink}
 				to={"/auth/login"}
