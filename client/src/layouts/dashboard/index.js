@@ -1,5 +1,6 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Stack } from "@mui/material";
 import SidebarNav from "./SidebarNav";
 
 const DashboardLayout = () => {
@@ -9,7 +10,14 @@ const DashboardLayout = () => {
 		return <Navigate to={"/auth/login"} />;
 	}
 
-	return <SidebarNav></SidebarNav>;
+	return (
+		<>
+			<Stack direction={"row"}>
+				<SidebarNav />
+				<Outlet />
+			</Stack>
+		</>
+	);
 };
 
 export default DashboardLayout;
