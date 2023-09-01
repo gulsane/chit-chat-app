@@ -1,9 +1,34 @@
+import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
-import { Box, IconButton, Stack } from "@mui/material";
-import { ChatCircleDots, Phone, Users } from "phosphor-react";
+import { Box, Divider, IconButton, Stack } from "@mui/material";
+import { ChatCircleDots, Gear, Phone, Users } from "phosphor-react";
 import Logo from "../../assets/Images/logo.ico";
 
+const NAV_BUTTONS = [
+	{
+		index: 0,
+		icon: <ChatCircleDots />,
+		path: "/app",
+	},
+	{
+		index: 1,
+		icon: <Users />,
+		path: "/group",
+	},
+	{
+		index: 2,
+		icon: <Phone />,
+		path: "/call",
+	},
+	{
+		index: 3,
+		icon: <Gear />,
+		path: "/settings",
+	},
+];
+
 const SidebarNav = () => {
+	const [tab, setTab] = useState(0);
 	const theme = useTheme();
 	return (
 		<Box
@@ -40,42 +65,48 @@ const SidebarNav = () => {
 						alignItems={"center"}
 						spacing={3}
 					>
-						<Box
-							sx={{ backgroundColor: theme.palette.primary.main, borderRadius: 1.5 }}
-							p={1}
-						>
-							{" "}
-							<IconButton
-								onClick={() => {}}
-								sx={{ width: "max-content", color: "#ffffff" }}
-							>
-								<ChatCircleDots />
-							</IconButton>
-						</Box>{" "}
-						<IconButton
-							onClick={() => {}}
-							sx={{
-								width: "max-content",
-								color:
-									theme.palette.mode === "loght"
-										? "#080707"
-										: theme.palette.text.primary,
-							}}
-						>
-							<Users />
-						</IconButton>
-						<IconButton
-							onClick={() => {}}
-							sx={{
-								width: "max-content",
-								color:
-									theme.palette.mode === "loght"
-										? "#080707"
-										: theme.palette.text.primary,
-							}}
-						>
-							<Phone />
-						</IconButton>
+						{NAV_BUTTONS.map((el) =>
+							el.index === tab ? (
+								<Box
+									sx={{
+										backgroundColor: theme.palette.primary.main,
+										borderRadius: 1.5,
+									}}
+									p={1}
+								>
+									<IconButton
+										onClick={() => {
+											setTab(el.index);
+										}}
+										sx={{ width: "max-content", color: "#ffffff" }}
+									>
+										{el.icon}
+									</IconButton>
+								</Box>
+							) : (
+								<Box
+									sx={{
+										backgroundColor: "transparent",
+									}}
+									p={1}
+								>
+									<IconButton
+										onClick={() => {
+											setTab(el.index);
+										}}
+										sx={{
+											width: "max-content",
+											color:
+												theme.palette.mode === "light"
+													? "#080707"
+													: theme.palette.text.primary,
+										}}
+									>
+										{el.icon}
+									</IconButton>
+								</Box>
+							)
+						)}
 					</Stack>
 				</Stack>
 			</Stack>
