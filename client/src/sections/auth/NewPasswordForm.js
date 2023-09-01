@@ -6,12 +6,14 @@ import { IconButton, InputAdornment, Stack } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { Eye, EyeSlash } from "phosphor-react";
 import { useDispatch } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 import FormProvider, { RHFTextField } from "../../components/hook-form";
 import { NewPassword } from "../../redux/slices/auth";
 
 const NewPasswordForm = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const dispatch = useDispatch();
+	const [queryParameters] = useSearchParams();
 
 	const VerifyCodeSchema = Yup.object().shape({
 		password: Yup.string()
@@ -38,7 +40,7 @@ const NewPasswordForm = () => {
 
 	const onSubmit = (data) => {
 		try {
-			dispatch(NewPassword({ ...data, token: "DEFAULT TOKEN" }));
+			dispatch(NewPassword({ ...data, token: queryParameters.get("token") }));
 		} catch (error) {}
 	};
 
