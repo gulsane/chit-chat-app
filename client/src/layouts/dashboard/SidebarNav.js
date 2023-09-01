@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
-import { Box, Divider, IconButton, Stack } from "@mui/material";
+import { Box, IconButton, Stack } from "@mui/material";
 import { ChatCircleDots, Gear, Phone, Users } from "phosphor-react";
 import Logo from "../../assets/Images/logo.ico";
 
@@ -30,6 +30,11 @@ const NAV_BUTTONS = [
 const SidebarNav = () => {
 	const [tab, setTab] = useState(0);
 	const theme = useTheme();
+
+	const handleNavChange = (index) => {
+		setTab(index);
+	};
+
 	return (
 		<Box
 			sx={{
@@ -76,7 +81,7 @@ const SidebarNav = () => {
 								>
 									<IconButton
 										onClick={() => {
-											setTab(el.index);
+											handleNavChange(el.index);
 										}}
 										sx={{ width: "max-content", color: "#ffffff" }}
 									>
@@ -92,7 +97,7 @@ const SidebarNav = () => {
 								>
 									<IconButton
 										onClick={() => {
-											setTab(el.index);
+											handleNavChange(el.index);
 										}}
 										sx={{
 											width: "max-content",
