@@ -1,5 +1,6 @@
 const otpGenerator = require("otp-generator");
 const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
 const User = require("../models/user");
 const catchAsync = require("../utils/catchAsync");
 const filterObj = require("../utils/filterObj");
