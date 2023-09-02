@@ -44,7 +44,7 @@ const SettingsProvider = ({ children }) => {
 
 	const onToggleMode = () => {
 		setSettings({
-			...setSettings,
+			...settings,
 			themeMode: settings.themeMode === "light" ? "dark" : "light",
 		});
 	};
