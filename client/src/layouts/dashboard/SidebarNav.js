@@ -124,7 +124,12 @@ const SidebarNav = () => {
 						)}
 					</Stack>
 				</Stack>
-				<Stack spacing={4}>
+				<Stack
+					spacing={4}
+					display={"flex"}
+					alignItems={"center"}
+					justifyContent={"center"}
+				>
 					<AntSwitch
 						defaultChecked={theme.palette.mode === "dark"}
 						onChange={onToggleMode}
