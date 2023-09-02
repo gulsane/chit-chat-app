@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Logo from "../../assets/Images/logo.ico";
 import { UpdateTab } from "../../redux/slices/app";
+import useSettings from "../../hooks/useSettings";
 
 const NAV_BUTTONS = [
 	{
@@ -86,6 +87,7 @@ const SidebarNav = () => {
 	const { tabIndex } = useSelector((state) => state.app);
 	const theme = useTheme();
 	const navigate = useNavigate();
+	const { onToggleMode } = useSettings();
 
 	const handleNavChange = (tabIndex, path) => {
 		dispatch(UpdateTab({ tabIndex }));
@@ -176,7 +178,7 @@ const SidebarNav = () => {
 				<Stack spacing={4}>
 					<AntSwitch
 						defaultChecked={theme.palette.mode === "dark"}
-						onChange={() => {}}
+						onChange={onToggleMode}
 					/>
 				</Stack>
 			</Stack>
