@@ -19,15 +19,13 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 			},
 			"& + .MuiSwitch-track": {
 				opacity: 1,
-				backgroundColor:
-					theme.palette.mode === "dark"
-						? "rgba(255,255,255,.35)"
-						: "rgba(0,0,0,.25)",
+				backgroundColor: theme.palette.primary.main,
 			},
 		},
 	},
 	"& .MuiSwitch-thumb": {
-		backgroundColor: theme.palette.mode === "dark" ? "#003892" : "#001e3c",
+		backgroundColor:
+			theme.palette.mode === "dark" ? "#001e3c" : theme.palette.primary.main,
 		width: 26,
 		height: 26,
 		"&:before": {
