@@ -29,6 +29,10 @@ const ProfileMenu = () => {
 	const handleClick = (event) => {
 		setAnchorEl(event.currentTarget);
 	};
+
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
 	return (
 		<>
 			<Avatar
@@ -49,7 +53,7 @@ const ProfileMenu = () => {
 				aria-labelledby="profile-positioned-button"
 				anchorEl={anchorEl}
 				open={openMenu}
-				onClose={() => {}}
+				onClose={handleClose}
 				anchorOrigin={{
 					vertical: "bottom",
 					horizontal: "right",
@@ -62,7 +66,7 @@ const ProfileMenu = () => {
 				<Box p={1}>
 					<Stack spacing={1}>
 						{Profile_Menu.map((el, idx) => (
-							<MenuItem onClick={() => {}} key={idx}>
+							<MenuItem onClick={handleClose} key={idx}>
 								<Stack
 									onClick={() => {}}
 									sx={{ width: 100 }}
