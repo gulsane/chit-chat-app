@@ -60,6 +60,7 @@ const routes = [
 			{ path: "/group", element: <h4>this is group page</h4> },
 			{ path: "/call", element: <h4>this is call page</h4> },
 			{ path: "/settings", element: <h4>this is settings page</h4> },
+			{ path: "/profile", element: <h4>this is Profile page</h4> },
 		],
 	},
 ];
