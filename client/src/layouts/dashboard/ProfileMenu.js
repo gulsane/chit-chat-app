@@ -41,7 +41,7 @@ const ProfileMenu = () => {
 				onClick={handleClick}
 			/>
 			<Menu
-				listprops={{
+				MenuListProps={{
 					"aria-labelledby": "fade-button",
 				}}
 				TransitionComponent={Fade}
