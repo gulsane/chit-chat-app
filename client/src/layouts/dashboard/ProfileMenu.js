@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Avatar, Box, Fade, Menu, MenuItem, Stack } from "@mui/material";
 import { faker } from "@faker-js/faker";
 import { User, Gear, SignOut } from "phosphor-react";
+import { useNavigate } from "react-router-dom";
 
 const Profile_Menu = [
 	{
@@ -19,6 +20,7 @@ const Profile_Menu = [
 ];
 
 const ProfileMenu = () => {
+	const navigate = useNavigate();
 	const [anchorEl, setAnchorEl] = useState(null);
 
 	const openMenu = Boolean(anchorEl);
@@ -68,11 +70,18 @@ const ProfileMenu = () => {
 						{Profile_Menu.map((el, idx) => (
 							<MenuItem onClick={handleClose} key={idx}>
 								<Stack
-									onClick={() => {}}
 									sx={{ width: 100 }}
 									direction="row"
 									alignItems={"center"}
 									justifyContent="space-between"
+									onClick={() => {
+										if (idx === 0) {
+											navigate("/profile");
+										} else if (idx === 1) {
+											navigate("/settings");
+										} else {
+										}
+									}}
 								>
 									<span>{el.title}</span>
 									{el.icon}
