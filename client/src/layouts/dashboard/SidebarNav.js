@@ -7,6 +7,7 @@ import Logo from "../../assets/Images/logo.ico";
 import { UpdateTab } from "../../redux/slices/app";
 import useSettings from "../../hooks/useSettings";
 import AntSwitch from "../../components/AntSwitch";
+import ProfileMenu from "./ProfileMenu";
 
 const NAV_BUTTONS = [
 	{
@@ -134,6 +135,7 @@ const SidebarNav = () => {
 						defaultChecked={theme.palette.mode === "dark"}
 						onChange={onToggleMode}
 					/>
+					<ProfileMenu />
 				</Stack>
 			</Stack>
 		</Box>
