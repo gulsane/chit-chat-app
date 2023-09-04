@@ -28,6 +28,11 @@ const slice = createSlice({
 			state.token = action.payload.token;
 			state.user_id = action.payload.user_id;
 		},
+		signOut(state) {
+			state.isLoggedIn = false;
+			state.token = "";
+			state.user_id = null;
+		},
 	},
 });
 
@@ -185,4 +190,9 @@ export const NewPassword = (formValues) => async (dispatch) => {
 			dispatch(showSnackBar({ severity: "error", message: error.message }));
 			dispatch(slice.actions.updateIsLoading({ isLoading: false, error: true }));
 		});
+};
+
+export const LogoutUser = () => async (dispatch) => {
+	window.localStorage.removeItem("user_id");
+	dispatch(slice.actions.signOut());
 };
