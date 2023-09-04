@@ -3,6 +3,8 @@ import { Avatar, Box, Fade, Menu, MenuItem, Stack } from "@mui/material";
 import { faker } from "@faker-js/faker";
 import { User, Gear, SignOut } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { LogoutUser } from "../../redux/slices/auth";
 
 const Profile_Menu = [
 	{
@@ -21,6 +23,7 @@ const Profile_Menu = [
 
 const ProfileMenu = () => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const [anchorEl, setAnchorEl] = useState(null);
 
 	const openMenu = Boolean(anchorEl);
@@ -80,6 +83,7 @@ const ProfileMenu = () => {
 										} else if (idx === 1) {
 											navigate("/settings");
 										} else {
+											dispatch(LogoutUser());
 										}
 									}}
 								>
