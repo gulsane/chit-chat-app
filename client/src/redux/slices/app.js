@@ -32,6 +32,9 @@ const slice = createSlice({
 		toggleSidebar(state) {
 			state.sideBar.open == !state.sideBar.open;
 		},
+		updateSidebarType(state, action) {
+			state.sideBar.type = action.payload.type;
+		},
 	},
 });
 
@@ -58,4 +61,8 @@ export const UpdateTab = ({ tabIndex }) => {
 
 export const ToggleSidebar = () => async (dispatch) => {
 	dispatch(slice.actions.toggleSidebar());
+};
+
+export const UpdateSidebarType = (type) => async (dispatch) => {
+	dispatch(slice.actions.updateSidebarType({ type }));
 };
