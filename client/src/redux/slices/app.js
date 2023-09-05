@@ -6,6 +6,10 @@ const initialState = {
 		severity: null,
 		message: null,
 	},
+	sideBar: {
+		open: false,
+		type: "CONTACT",
+	},
 	tabIndex: 0,
 };
 
@@ -24,6 +28,9 @@ const slice = createSlice({
 		},
 		updateTab(state, action) {
 			state.tabIndex = action.payload.tabIndex;
+		},
+		toggleSidebar(state) {
+			state.sideBar.open == !state.sideBar.open;
 		},
 	},
 });
@@ -47,4 +54,8 @@ export const UpdateTab = ({ tabIndex }) => {
 	return async (dispatch) => {
 		dispatch(slice.actions.updateTab({ tabIndex }));
 	};
+};
+
+export const ToggleSidebar = () => async (dispatch) => {
+	dispatch(slice.actions.toggleSidebar());
 };
