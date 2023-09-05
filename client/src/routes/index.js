@@ -24,6 +24,9 @@ const ResetPasswordPage = Loadable(
 const NewPasswordPage = Loadable(
 	lazy(() => import("../pages/auth/NewPassword"))
 );
+const GeneralApp = Loadable(
+	lazy(() => import("../pages/dashboard/GeneralApp"))
+);
 
 const routes = [
 	{
@@ -56,7 +59,7 @@ const routes = [
 		path: "/",
 		element: <DashboardLayout />,
 		children: [
-			{ path: "/app", element: <h4>this is general app page</h4> },
+			{ path: "/app", element: <GeneralApp /> },
 			{ path: "/group", element: <h4>this is group page</h4> },
 			{ path: "/call", element: <h4>this is call page</h4> },
 			{ path: "/settings", element: <h4>this is settings page</h4> },
