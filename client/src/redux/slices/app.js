@@ -30,7 +30,7 @@ const slice = createSlice({
 			state.tabIndex = action.payload.tabIndex;
 		},
 		toggleSidebar(state) {
-			state.sideBar.open == !state.sideBar.open;
+			state.sideBar.open = !state.sideBar.open;
 		},
 		updateSidebarType(state, action) {
 			state.sideBar.type = action.payload.type;
