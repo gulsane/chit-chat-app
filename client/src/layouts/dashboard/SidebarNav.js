@@ -71,7 +71,7 @@ const SidebarNav = () => {
 							backgroundColor: theme.palette.primary.main,
 						}}
 					>
-						<img src={Logo} alt="chit-chat" />
+						<img src={Logo} alt="chit-chat" height={64} width={64} />
 					</Box>
 					<Stack
 						sx={{ width: "max-content" }}
