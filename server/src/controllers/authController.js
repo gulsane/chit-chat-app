@@ -266,4 +266,5 @@ module.exports = {
 	login,
 	forgetPassword,
 	resetPassword,
+	protect,
 };
