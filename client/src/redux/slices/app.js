@@ -11,6 +11,8 @@ const initialState = {
 		type: "CONTACT",
 	},
 	tabIndex: 0,
+	chat_type: null,
+	room_id: null,
 };
 
 const slice = createSlice({
@@ -34,6 +36,10 @@ const slice = createSlice({
 		},
 		updateSidebarType(state, action) {
 			state.sideBar.type = action.payload.type;
+		},
+		selectConversation(state, action) {
+			state.chat_type = "individual";
+			state.room_id = action.payload.room_id;
 		},
 	},
 });
@@ -65,4 +71,10 @@ export const ToggleSidebar = () => async (dispatch) => {
 
 export const UpdateSidebarType = (type) => async (dispatch) => {
 	dispatch(slice.actions.updateSidebarType({ type }));
+};
+
+export const SelectConversation = ({ room_id }) => {
+	return async (dispatch) => {
+		dispatch(slice.actions.selectConversation({ room_id }));
+	};
 };
