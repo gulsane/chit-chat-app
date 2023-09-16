@@ -7,6 +7,8 @@ import {
 } from "phosphor-react";
 import SidebarContainer from "./SidebarContainer";
 import { Search, StyledInputBase, SearchIconWrapper } from "../search";
+import ChatElement from "../ChatElement";
+import { ChatList } from "../../data";
 
 const Chat = () => {
 	return (
@@ -50,9 +52,15 @@ const Chat = () => {
 						<Typography variant="subtitle2" sx={{ color: "#676667" }}>
 							Pinned
 						</Typography>
+						{ChatList.filter((el) => el.pinned).map((el) => {
+							return <ChatElement {...el} />;
+						})}
 						<Typography variant="subtitle2" sx={{ color: "#676667" }}>
 							All Chats
 						</Typography>
+						{ChatList.filter((el) => !el.pinned).map((el) => {
+							return <ChatElement {...el} />;
+						})}
 					</Stack>
 				</Stack>
 			</Stack>
