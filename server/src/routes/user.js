@@ -4,5 +4,10 @@ const userController = require("../controllers/userController");
 
 router.get("/get-me", protect, userController.getMe);
 router.patch("/update-me", protect, userController.updateMe);
+router.get(
+	"/get-all-verified-users",
+	protect,
+	userController.getAllVerifiedUsers
+);
 
 module.exports = router;

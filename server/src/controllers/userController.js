@@ -27,4 +27,20 @@ const updateMe = catchAsync(async (req, res, next) => {
 	});
 });
 
-module.exports = { getMe, updateMe };
+const getAllVerifiedUsers = catchAsync(async (req, res, next) => {
+	const all_users = await User.find({
+		verified: true,
+	}).select("firstName lastName _id");
+
+	const remaining_users = all_users.filter(
+		(user) => user._id.toString() !== req.user._id.toString()
+	);
+
+	res.status(200).json({
+		status: "success",
+		data: remaining_users,
+		message: "Users found successfully!",
+	});
+});
+
+module.exports = { getMe, updateMe, getAllVerifiedUsers };
