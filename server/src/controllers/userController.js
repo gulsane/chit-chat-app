@@ -76,10 +76,24 @@ const getFriendRequests = catchAsync(async (req, res) => {
 	});
 });
 
+const getFriends = catchAsync(async (req, res) => {
+	const this_user = User.findById(req.user._id).populate(
+		"friends",
+		"firstName lastName _id"
+	);
+
+	res.status(200).json({
+		status: "success",
+		data: this_user.friends,
+		message: "Friends found successfully",
+	});
+});
+
 module.exports = {
 	getMe,
 	updateMe,
 	getAllVerifiedUsers,
 	getUsers,
 	getFriendRequests,
+	getFriends,
 };
