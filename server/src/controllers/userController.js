@@ -2,6 +2,8 @@ const catchAsync = require("../utils/catchAsync");
 const filterObj = require("../utils/filterObj");
 const User = require("../models/user");
 const FriendRequest = require("../models/friendRequest");
+const AudioCall = require("../models/audioCall");
+const VideoCall = require("../models/videoCall");
 
 const getMe = catchAsync(async (req, res) => {
 	res.status(200).json({
@@ -89,6 +91,86 @@ const getFriends = catchAsync(async (req, res) => {
 	});
 });
 
+const getCallLogs = catchAsync(async (req, res) => {
+	const user_id = req.user._id;
+
+	const call_logs = [];
+
+	const audio_calls = await AudioCall.find({
+		participants: { $all: [user_id] },
+	}).populate("from to");
+
+	const video_calls = await VideoCall.find({
+		participants: { $all: [user_id] },
+	}).populate("from to");
+
+	for (let elm of audio_calls) {
+		const missed = elm.verdict !== "Accepted";
+		if (elm.from._id.toString() === user_id.toString()) {
+			const other_user = elm.to;
+
+			// outgoing
+			call_logs.push({
+				id: elm._id,
+				img: other_user.avatar,
+				name: other_user.firstName,
+				online: true,
+				incoming: false,
+				missed,
+			});
+		} else {
+			// incoming
+			const other_user = elm.from;
+
+			// outgoing
+			call_logs.push({
+				id: elm._id,
+				img: other_user.avatar,
+				name: other_user.firstName,
+				online: true,
+				incoming: false,
+				missed,
+			});
+		}
+	}
+
+	for (let element of video_calls) {
+		const missed = element.verdict !== "Accepted";
+		if (element.from._id.toString() === user_id.toString()) {
+			const other_user = element.to;
+
+			// outgoing
+			call_logs.push({
+				id: element._id,
+				img: other_user.avatar,
+				name: other_user.firstName,
+				online: true,
+				incoming: false,
+				missed,
+			});
+		} else {
+			// incoming
+			const other_user = element.from;
+
+			// outgoing
+			call_logs.push({
+				id: element._id,
+				img: other_user.avatar,
+				name: other_user.firstName,
+				online: true,
+				incoming: false,
+				missed,
+			});
+		}
+	}
+
+	res.status(200).json({
+		status: "success",
+		message: "Call Logs Found successfully!",
+		data: call_logs,
+	});
+});
+
 module.exports = {
 	getMe,
 	updateMe,
@@ -96,4 +178,5 @@ module.exports = {
 	getUsers,
 	getFriendRequests,
 	getFriends,
+	getCallLogs,
 };
