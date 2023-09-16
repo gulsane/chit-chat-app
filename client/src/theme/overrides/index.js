@@ -40,7 +40,6 @@ import Autocomplete from "./Autocomplete";
 import ToggleButton from "./ToggleButton";
 import ControlLabel from "./ControlLabel";
 import LoadingButton from "./LoadingButton";
-import Scrollbar from "./Scrollbar";
 
 // ----------------------------------------------------------------------
 
@@ -87,7 +86,6 @@ export default function ComponentsOverrides(theme) {
 		Autocomplete(theme),
 		ControlLabel(theme),
 		ToggleButton(theme),
-		LoadingButton(theme),
-		Scrollbar(theme)
+		LoadingButton(theme)
 	);
 }
