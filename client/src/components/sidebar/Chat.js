@@ -1,5 +1,10 @@
-import { IconButton, Stack, Typography } from "@mui/material";
-import { CircleDashed, MagnifyingGlass, Users } from "phosphor-react";
+import { Button, Divider, IconButton, Stack, Typography } from "@mui/material";
+import {
+	ArchiveBox,
+	CircleDashed,
+	MagnifyingGlass,
+	Users,
+} from "phosphor-react";
 import SidebarContainer from "./SidebarContainer";
 import { Search, StyledInputBase, SearchIconWrapper } from "../search";
 
@@ -32,6 +37,23 @@ const Chat = () => {
 							inputProps={{ "aria-label": "search" }}
 						/>
 					</Search>
+				</Stack>
+				<Stack spacing={1}>
+					<Stack spacing={1.5} direction={"row"} alignItems={"center"}>
+						<ArchiveBox size={24} />
+						<Button variant="text">Archive</Button>
+					</Stack>
+					<Divider />
+				</Stack>
+				<Stack sx={{ overflowY: "scroll", flexGrow: 1, height: "100%" }}>
+					<Stack spacing={2.4}>
+						<Typography variant="subtitle2" sx={{ color: "#676667" }}>
+							Pinned
+						</Typography>
+						<Typography variant="subtitle2" sx={{ color: "#676667" }}>
+							All Chats
+						</Typography>
+					</Stack>
 				</Stack>
 			</Stack>
 		</SidebarContainer>
