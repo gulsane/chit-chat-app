@@ -1,6 +1,7 @@
 import { IconButton, Stack, Typography } from "@mui/material";
-import { CircleDashed, Users } from "phosphor-react";
+import { CircleDashed, MagnifyingGlass, Users } from "phosphor-react";
 import SidebarContainer from "./SidebarContainer";
+import { Search, StyledInputBase, SearchIconWrapper } from "../search";
 
 const Chat = () => {
 	return (
@@ -20,6 +21,17 @@ const Chat = () => {
 							<CircleDashed />
 						</IconButton>
 					</Stack>
+				</Stack>
+				<Stack sx={{ width: "100%" }}>
+					<Search>
+						<SearchIconWrapper>
+							<MagnifyingGlass color="#709CE6" />
+						</SearchIconWrapper>
+						<StyledInputBase
+							placeholder="Search..."
+							inputProps={{ "aria-label": "search" }}
+						/>
+					</Search>
 				</Stack>
 			</Stack>
 		</SidebarContainer>
