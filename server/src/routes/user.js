@@ -9,6 +9,7 @@ router.get(
 	protect,
 	userController.getAllVerifiedUsers
 );
-
 router.get("/get-users", protect, userController.getUsers);
+router.get("/get-friend-requests", protect, userController.getFriendRequests);
+
 module.exports = router;

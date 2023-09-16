@@ -1,15 +1,16 @@
 const catchAsync = require("../utils/catchAsync");
 const filterObj = require("../utils/filterObj");
 const User = require("../models/user");
+const FriendRequest = require("../models/friendRequest");
 
-const getMe = catchAsync(async (req, res, next) => {
+const getMe = catchAsync(async (req, res) => {
 	res.status(200).json({
 		status: "success",
 		data: req.user,
 	});
 });
 
-const updateMe = catchAsync(async (req, res, next) => {
+const updateMe = catchAsync(async (req, res) => {
 	const filteredBody = filterObj(
 		req.body,
 		"firstName",
@@ -27,7 +28,7 @@ const updateMe = catchAsync(async (req, res, next) => {
 	});
 });
 
-const getAllVerifiedUsers = catchAsync(async (req, res, next) => {
+const getAllVerifiedUsers = catchAsync(async (req, res) => {
 	const all_users = await User.find({
 		verified: true,
 	}).select("firstName lastName _id");
@@ -43,7 +44,7 @@ const getAllVerifiedUsers = catchAsync(async (req, res, next) => {
 	});
 });
 
-const getUsers = catchAsync(async (req, res, next) => {
+const getUsers = catchAsync(async (req, res) => {
 	const all_users = await User.find({
 		verified: true,
 	}).select("firstName lastName _id");
@@ -63,4 +64,22 @@ const getUsers = catchAsync(async (req, res, next) => {
 	});
 });
 
-module.exports = { getMe, updateMe, getAllVerifiedUsers, getUsers };
+const getFriendRequests = catchAsync(async (req, res) => {
+	const requests = await FriendRequest.find({ recipient: req.user._id })
+		.populate("sender")
+		.select("_id firstName lastName");
+
+	res.status(200).json({
+		status: "success",
+		data: requests,
+		message: "Requests found successfully!",
+	});
+});
+
+module.exports = {
+	getMe,
+	updateMe,
+	getAllVerifiedUsers,
+	getUsers,
+	getFriendRequests,
+};
