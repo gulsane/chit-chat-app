@@ -10,4 +10,5 @@ router.get(
 	userController.getAllVerifiedUsers
 );
 
+router.get("/get-users", protect, userController.getUsers);
 module.exports = router;
