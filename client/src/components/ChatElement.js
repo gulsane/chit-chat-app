@@ -45,6 +45,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const ChatElement = ({ img, name, msg, time, unread, online, id }) => {
 	const dispatch = useDispatch();
+	const theme = useTheme();
 	const { room_id } = useSelector((state) => state.app);
 	const selectedChatId = room_id?.toString();
 
@@ -53,8 +54,6 @@ const ChatElement = ({ img, name, msg, time, unread, online, id }) => {
 	if (!selectedChatId) {
 		isSelected = false;
 	}
-
-	const theme = useTheme();
 
 	return (
 		<StyledChatBox
